@@ -1,31 +1,123 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>LA TV Shows | Home</title>
-    <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creator Content Idea Catalog</title>
+    <meta
+      name="description"
+      content="A clean one-page catalog for browsing creator content ideas by format, effort, and audience intent."
+    />
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+    <script src="scripts.js" defer></script>
   </head>
-
   <body>
-    <header class="main-header">
-      <h1 class="title">LA TV Shows</h1>
-    </header>
-    <div id="card-container"></div>
-    <div class="card" style="display: none">
-      <div class="card-content">
-        <h2>TV Show Title</h2>
-        <img src="" alt="TV Show Poster" />
-        <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer">
-      <button onclick="quoteAlert()">Get A Quote!</button>
-      <button onclick="removeLastCard()">Remove A Card!</button>
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="#top">Idea Atlas</a>
+          <div class="topbar-meta">
+            <span>127 ideas logged</span>
+            <span>Updated weekly</span>
+          </div>
+        </nav>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Creator Planning Hub</p>
+          <h1>Build your next month of content from one organized catalog.</h1>
+          <p class="hero-text">
+            Browse repeatable video, short-form, and newsletter concepts with
+            filters for format, effort, and funnel stage.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#catalog">Browse Ideas</a>
+            <a class="button button-secondary" href="#filters">Refine View</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="stats" aria-label="Catalog overview">
+          <article class="stat-card">
+            <span class="stat-value" id="visible-count">0</span>
+            <span class="stat-label">Visible Ideas</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value" id="short-form-count">0</span>
+            <span class="stat-label">Short-Form Concepts</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value" id="low-effort-count">0</span>
+            <span class="stat-label">Low-Effort Wins</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value" id="audience-focus">0</span>
+            <span class="stat-label">Audience Stages Covered</span>
+          </article>
+        </section>
+
+        <section class="filters-panel" id="filters" aria-labelledby="filters-title">
+          <div class="section-heading">
+            <p class="eyebrow">Filters</p>
+            <h2 id="filters-title">Narrow the catalog without losing momentum.</h2>
+          </div>
+
+          <form class="filters" autocomplete="off">
+            <label class="search-field">
+              <span class="field-label">Search</span>
+              <input
+                id="search-input"
+                type="search"
+                placeholder="Search ideas, hooks, or outcomes"
+              />
+            </label>
+
+            <label class="select-field">
+              <span class="field-label">Format</span>
+              <select id="format-filter">
+                <option value="all">All formats</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Shorts">Shorts</option>
+                <option value="Newsletter">Newsletter</option>
+                <option value="Carousel">Carousel</option>
+                <option value="Live">Live</option>
+              </select>
+            </label>
+
+            <label class="select-field">
+              <span class="field-label">Effort</span>
+              <select id="effort-filter">
+                <option value="all">All effort levels</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </label>
+
+            <label class="select-field">
+              <span class="field-label">Audience Intent</span>
+              <select id="audience-filter">
+                <option value="all">All stages</option>
+                <option value="Attract">Attract</option>
+                <option value="Nurture">Nurture</option>
+                <option value="Convert">Convert</option>
+              </select>
+            </label>
+          </form>
+        </section>
+
+        <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+          <div class="section-heading heading-row">
+            <div>
+              <p class="eyebrow">Idea Grid</p>
+              <h2 id="catalog-title">Content ideas built for consistency, not guesswork.</h2>
+            </div>
+            <p class="results-copy" id="results-copy">Showing 0 ideas</p>
+          </div>
+
+          <div class="card-grid" id="card-grid" aria-live="polite"></div>
+        </section>
+      </main>
     </div>
   </body>
 </html>
