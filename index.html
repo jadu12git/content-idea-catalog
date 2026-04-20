@@ -17,105 +17,213 @@
         <nav class="topbar" aria-label="Primary">
           <a class="brand" href="#top">Idea Atlas</a>
           <div class="topbar-meta">
-            <span>127 ideas logged</span>
-            <span>Updated weekly</span>
+            <span>Creator Idea Matcher</span>
+            <span>One-page planner</span>
           </div>
         </nav>
 
         <div class="hero-copy">
           <p class="eyebrow">Creator Planning Hub</p>
-          <h1>Build your next month of content from one organized catalog.</h1>
+          <h1>Answer a few questions and get content ideas that fit your workflow.</h1>
           <p class="hero-text">
-            Browse repeatable video, short-form, and newsletter concepts with
-            filters for format, effort, and funnel stage.
+            Use this guided questionnaire to narrow down creator content ideas by
+            niche, skill level, filming time, editing effort, and current goal.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#catalog">Browse Ideas</a>
-            <a class="button button-secondary" href="#filters">Refine View</a>
+            <a class="button button-primary" href="#questionnaire">Start Questionnaire</a>
+            <a class="button button-secondary" href="#results-section">View Results Area</a>
           </div>
         </div>
       </header>
 
-      <main>
-        <section class="stats" aria-label="Catalog overview">
-          <article class="stat-card">
-            <span class="stat-value" id="visible-count">0</span>
-            <span class="stat-label">Visible Ideas</span>
-          </article>
-          <article class="stat-card">
-            <span class="stat-value" id="short-form-count">0</span>
-            <span class="stat-label">Short-Form Concepts</span>
-          </article>
-          <article class="stat-card">
-            <span class="stat-value" id="low-effort-count">0</span>
-            <span class="stat-label">Low-Effort Wins</span>
-          </article>
-          <article class="stat-card">
-            <span class="stat-value" id="audience-focus">0</span>
-            <span class="stat-label">Audience Stages Covered</span>
-          </article>
-        </section>
-
-        <section class="filters-panel" id="filters" aria-labelledby="filters-title">
+      <main class="page-main">
+        <section
+          class="questionnaire-section filters-panel"
+          id="questionnaire"
+          aria-labelledby="questionnaire-title"
+        >
           <div class="section-heading">
-            <p class="eyebrow">Filters</p>
-            <h2 id="filters-title">Narrow the catalog without losing momentum.</h2>
+            <p class="eyebrow">Questionnaire</p>
+            <h2 id="questionnaire-title">Tell us what kind of content support you need.</h2>
           </div>
 
-          <form class="filters" autocomplete="off">
-            <label class="search-field">
-              <span class="field-label">Search</span>
-              <input
-                id="search-input"
-                type="search"
-                placeholder="Search ideas, hooks, or outcomes"
-              />
-            </label>
+          <form
+            class="questionnaire-form"
+            id="questionnaire-form"
+            autocomplete="off"
+            aria-describedby="questionnaire-description"
+          >
+            <p class="form-description hero-text" id="questionnaire-description">
+              Complete the six questions below to generate a more relevant set of
+              creator content ideas.
+            </p>
 
-            <label class="select-field">
-              <span class="field-label">Format</span>
-              <select id="format-filter">
-                <option value="all">All formats</option>
-                <option value="YouTube">YouTube</option>
-                <option value="Shorts">Shorts</option>
-                <option value="Newsletter">Newsletter</option>
-                <option value="Carousel">Carousel</option>
-                <option value="Live">Live</option>
-              </select>
-            </label>
+            <div class="question-grid">
+              <fieldset class="question-card" id="question-niche-group">
+                <legend class="field-label">1. What type of content do you create?</legend>
+                <label class="select-field" for="niche">
+                  <span class="field-label">Niche</span>
+                  <select id="niche" name="niche">
+                    <option value="">Select your niche</option>
+                    <option value="creator-education">Creator Education</option>
+                    <option value="youtube-growth">YouTube Growth</option>
+                    <option value="short-form-strategy">Short-Form Strategy</option>
+                    <option value="video-editing">Video Editing</option>
+                    <option value="email-marketing">Email Marketing</option>
+                    <option value="monetization">Monetization</option>
+                  </select>
+                </label>
+              </fieldset>
 
-            <label class="select-field">
-              <span class="field-label">Effort</span>
-              <select id="effort-filter">
-                <option value="all">All effort levels</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </label>
+              <fieldset class="question-card" id="question-skill-level-group">
+                <legend class="field-label">2. What is your experience level?</legend>
+                <label class="select-field" for="skillLevel">
+                  <span class="field-label">Skill Level</span>
+                  <select id="skillLevel" name="skillLevel">
+                    <option value="">Select your experience</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                  </select>
+                </label>
+              </fieldset>
 
-            <label class="select-field">
-              <span class="field-label">Audience Intent</span>
-              <select id="audience-filter">
-                <option value="all">All stages</option>
-                <option value="Attract">Attract</option>
-                <option value="Nurture">Nurture</option>
-                <option value="Convert">Convert</option>
-              </select>
-            </label>
+              <fieldset class="question-card" id="question-filming-time-group">
+                <legend class="field-label">3. How much time do you have to film?</legend>
+                <label class="select-field" for="filmingTime">
+                  <span class="field-label">Filming Time</span>
+                  <select id="filmingTime" name="filmingTime">
+                    <option value="">Select filming time</option>
+                    <option value="low">0-15 minutes</option>
+                    <option value="medium">15-45 minutes</option>
+                    <option value="high">45+ minutes</option>
+                  </select>
+                </label>
+              </fieldset>
+
+              <fieldset class="question-card" id="question-editing-effort-group">
+                <legend class="field-label">4. How much editing do you want to do?</legend>
+                <label class="select-field" for="editingEffort">
+                  <span class="field-label">Editing Effort</span>
+                  <select id="editingEffort" name="editingEffort">
+                    <option value="">Select editing effort</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </label>
+              </fieldset>
+
+              <fieldset class="question-card" id="question-goal-group">
+                <legend class="field-label">5. What is your main goal right now?</legend>
+                <label class="select-field" for="goal">
+                  <span class="field-label">Goal</span>
+                  <select id="goal" name="goal">
+                    <option value="">Select your goal</option>
+                    <option value="grow-audience">Grow audience</option>
+                    <option value="increase-engagement">Increase engagement</option>
+                    <option value="improve-consistency">Improve consistency</option>
+                    <option value="sell-offer">Sell an offer</option>
+                    <option value="build-authority">Build authority</option>
+                  </select>
+                </label>
+              </fieldset>
+
+              <fieldset class="question-card" id="question-trend-friendly-group">
+                <legend class="field-label">6. Do you want trend-friendly ideas?</legend>
+                <div class="radio-group" id="trendFriendly-group">
+                  <label class="radio-option" for="trendFriendly-yes">
+                    <input
+                      id="trendFriendly-yes"
+                      type="radio"
+                      name="trendFriendly"
+                      value="yes"
+                    />
+                    <span>Yes</span>
+                  </label>
+                  <label class="radio-option" for="trendFriendly-no">
+                    <input
+                      id="trendFriendly-no"
+                      type="radio"
+                      name="trendFriendly"
+                      value="no"
+                    />
+                    <span>No</span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="form-actions" id="form-actions">
+              <button class="button button-primary" id="submit-questionnaire" type="submit">
+                Get My Ideas
+              </button>
+              <button class="button button-secondary" id="clear-questionnaire" type="reset">
+                Clear Form
+              </button>
+            </div>
           </form>
         </section>
 
-        <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+        <section
+          class="results-section"
+          id="results-section"
+          aria-labelledby="results-title"
+          hidden
+        >
           <div class="section-heading heading-row">
             <div>
-              <p class="eyebrow">Idea Grid</p>
-              <h2 id="catalog-title">Content ideas built for consistency, not guesswork.</h2>
+              <p class="eyebrow">Results</p>
+              <h2 id="results-title">Recommended ideas based on your answers.</h2>
             </div>
-            <p class="results-copy" id="results-copy">Showing 0 ideas</p>
+            <p class="results-copy" id="results-summary">No results generated yet.</p>
           </div>
 
-          <div class="card-grid" id="card-grid" aria-live="polite"></div>
+          <section class="stats" id="results-stats" aria-label="Result summary">
+            <article class="stat-card">
+              <span class="stat-value" id="matched-total">0</span>
+              <span class="stat-label">Total Matched Ideas</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value" id="selected-niche">-</span>
+              <span class="stat-label">Top Niche Selected</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value" id="average-engagement">-</span>
+              <span class="stat-label">Average Engagement</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value" id="trend-friendly-count">0</span>
+              <span class="stat-label">Trend-Friendly Results</span>
+            </article>
+          </section>
+
+          <section class="catalog" id="results-catalog" aria-labelledby="results-list-title">
+            <div class="section-heading">
+              <p class="eyebrow">Idea List</p>
+              <h3 id="results-list-title">Suggested content ideas</h3>
+            </div>
+            <div class="card-grid" id="results-grid" aria-live="polite"></div>
+          </section>
+        </section>
+
+        <section
+          class="reset-section filters-panel"
+          id="reset-section"
+          aria-labelledby="reset-title"
+        >
+          <div class="section-heading heading-row">
+            <div>
+              <p class="eyebrow">Start Over</p>
+              <h2 id="reset-title">Want to try a different content direction?</h2>
+            </div>
+            <p class="results-copy">Reset your answers and run the questionnaire again.</p>
+          </div>
+          <div class="reset-actions" id="reset-actions">
+            <button class="button button-secondary" id="start-over-button" type="button">
+              Start Over
+            </button>
+          </div>
         </section>
       </main>
     </div>

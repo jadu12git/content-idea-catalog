@@ -701,256 +701,352 @@ const ideas = [
   },
 ];
 
-const searchInput = document.getElementById("search-input");
-const filtersForm = document.querySelector(".filters");
-const formatFilter = document.getElementById("format-filter");
-const effortFilter = document.getElementById("effort-filter");
-const audienceFilter = document.getElementById("audience-filter");
-const cardGrid = document.getElementById("card-grid");
-const resultsCopy = document.getElementById("results-copy");
+const questionnaireForm = document.getElementById("questionnaire-form");
+const resultsSection = document.getElementById("results-section");
+const resultsGrid = document.getElementById("results-grid");
+const resultsSummary = document.getElementById("results-summary");
 
-const visibleCount = document.getElementById("visible-count");
-const shortFormCount = document.getElementById("short-form-count");
-const lowEffortCount = document.getElementById("low-effort-count");
-const audienceFocus = document.getElementById("audience-focus");
+const matchedTotal = document.getElementById("matched-total");
+const selectedNiche = document.getElementById("selected-niche");
+const averageEngagement = document.getElementById("average-engagement");
+const trendFriendlyCount = document.getElementById("trend-friendly-count");
 
-let nicheFilter;
-let sortSelect;
-let resetButton;
+const clearQuestionnaireButton = document.getElementById("clear-questionnaire");
+const startOverButton = document.getElementById("start-over-button");
 
-function matchesFilter(value, selectedValue) {
-  return selectedValue === "all" || value === selectedValue;
-}
+const nicheField = document.getElementById("niche");
+const skillLevelField = document.getElementById("skillLevel");
+const filmingTimeField = document.getElementById("filmingTime");
+const editingEffortField = document.getElementById("editingEffort");
+const goalField = document.getElementById("goal");
 
-function createSelectField(id, labelText, options) {
-  const wrapper = document.createElement("label");
-  wrapper.className = "select-field";
+const nicheMap = {
+  "creator-education": "Creator Education",
+  "youtube-growth": "YouTube Growth",
+  "short-form-strategy": "Short-Form Strategy",
+  "video-editing": "Video Editing",
+  "email-marketing": "Email Marketing",
+  monetization: "Monetization",
+};
 
-  const label = document.createElement("span");
-  label.className = "field-label";
-  label.textContent = labelText;
+const engagementScores = {
+  Low: 1,
+  Medium: 2,
+  High: 3,
+};
 
-  const select = document.createElement("select");
-  select.id = id;
+const goalLabels = {
+  "grow-audience": "Grow Audience",
+  "increase-engagement": "Increase Engagement",
+  "improve-consistency": "Improve Consistency",
+  "sell-offer": "Sell an Offer",
+  "build-authority": "Build Authority",
+};
 
-  options.forEach((optionConfig) => {
-    const option = document.createElement("option");
-    option.value = optionConfig.value;
-    option.textContent = optionConfig.label;
-    select.appendChild(option);
-  });
-
-  wrapper.append(label, select);
-  return { wrapper, select };
-}
-
-function createResetControl() {
-  const wrapper = document.createElement("div");
-  wrapper.className = "select-field";
-
-  const label = document.createElement("span");
-  label.className = "field-label";
-  label.textContent = "Reset";
-
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "button button-secondary";
-  button.textContent = "Reset Filters";
-
-  wrapper.append(label, button);
-  return { wrapper, button };
-}
-
-function buildDynamicControls() {
-  const nicheOptions = [
-    { value: "all", label: "All niches" },
-    ...[...new Set(ideas.map((idea) => idea.niche))]
-      .sort((left, right) => left.localeCompare(right))
-      .map((niche) => ({ value: niche, label: niche })),
-  ];
-
-  const { wrapper: nicheWrapper, select: nicheSelect } = createSelectField(
-    "niche-filter",
-    "Niche",
-    nicheOptions,
+function getFormAnswers() {
+  const trendFriendlyChoice = questionnaireForm.querySelector(
+    'input[name="trendFriendly"]:checked',
   );
-  const { wrapper: sortWrapper, select } = createSelectField("sort-select", "Sort", [
-    { value: "title-asc", label: "Title A-Z" },
-    { value: "title-desc", label: "Title Z-A" },
-    { value: "engagement-desc", label: "Engagement High-Low" },
-    { value: "engagement-asc", label: "Engagement Low-High" },
-    { value: "filming-asc", label: "Filming Time Short-Long" },
-    { value: "filming-desc", label: "Filming Time Long-Short" },
-  ]);
-  const { wrapper: resetWrapper, button } = createResetControl();
 
-  filtersForm.append(nicheWrapper, sortWrapper, resetWrapper);
-
-  nicheFilter = nicheSelect;
-  sortSelect = select;
-  resetButton = button;
-}
-
-function engagementRank(value) {
   return {
-    Low: 1,
-    Medium: 2,
-    High: 3,
-  }[value] ?? 0;
+    niche: nicheField.value,
+    skillLevel: skillLevelField.value,
+    filmingTime: filmingTimeField.value,
+    editingEffort: editingEffortField.value,
+    goal: goalField.value,
+    trendFriendly: trendFriendlyChoice ? trendFriendlyChoice.value : "",
+  };
 }
 
-function filmingMinutes(value) {
-  const match = value.match(/\d+/);
-  return match ? Number(match[0]) : 0;
+function getIdeaSkillLevel(idea) {
+  const difficultyMap = {
+    Low: "beginner",
+    Medium: "intermediate",
+    High: "advanced",
+  };
+
+  return difficultyMap[idea.difficulty] || "";
 }
 
-function sortIdeas(filteredIdeas) {
-  const sortedIdeas = [...filteredIdeas];
+function getSkillLevelLabel(idea) {
+  const skillLevelLabels = {
+    beginner: "Beginner",
+    intermediate: "Intermediate",
+    advanced: "Advanced",
+  };
 
-  switch (sortSelect.value) {
-    case "title-desc":
-      sortedIdeas.sort((left, right) => right.title.localeCompare(left.title));
-      break;
-    case "engagement-desc":
-      sortedIdeas.sort(
-        (left, right) =>
-          engagementRank(right.engagementPotential) -
-            engagementRank(left.engagementPotential) ||
-          left.title.localeCompare(right.title),
-      );
-      break;
-    case "engagement-asc":
-      sortedIdeas.sort(
-        (left, right) =>
-          engagementRank(left.engagementPotential) -
-            engagementRank(right.engagementPotential) ||
-          left.title.localeCompare(right.title),
-      );
-      break;
-    case "filming-asc":
-      sortedIdeas.sort(
-        (left, right) =>
-          filmingMinutes(left.filmingTime) - filmingMinutes(right.filmingTime) ||
-          left.title.localeCompare(right.title),
-      );
-      break;
-    case "filming-desc":
-      sortedIdeas.sort(
-        (left, right) =>
-          filmingMinutes(right.filmingTime) - filmingMinutes(left.filmingTime) ||
-          left.title.localeCompare(right.title),
-      );
-      break;
-    case "title-asc":
-    default:
-      sortedIdeas.sort((left, right) => left.title.localeCompare(right.title));
-      break;
+  return skillLevelLabels[getIdeaSkillLevel(idea)] || idea.difficulty;
+}
+
+function getIdeaFilmingTimeBucket(idea) {
+  const minutes = Number.parseInt(idea.filmingTime, 10);
+
+  if (minutes <= 15) {
+    return "low";
   }
 
-  return sortedIdeas;
+  if (minutes <= 45) {
+    return "medium";
+  }
+
+  return "high";
 }
 
-function filterIdeas() {
-  const query = searchInput.value.trim().toLowerCase();
+function getIdeaGoals(idea) {
+  const goals = [];
 
-  return ideas.filter((idea) => {
-    const matchesQuery =
-      query === "" ||
-      idea.title.toLowerCase().includes(query) ||
-      idea.niche.toLowerCase().includes(query) ||
-      idea.description.toLowerCase().includes(query) ||
-      idea.tags.join(" ").toLowerCase().includes(query);
+  if (idea.audience === "Attract") {
+    goals.push("grow-audience", "build-authority");
+  }
 
-    return (
-      matchesQuery &&
-      matchesFilter(idea.niche, nicheFilter.value) &&
-      matchesFilter(idea.format, formatFilter.value) &&
-      matchesFilter(idea.difficulty, effortFilter.value) &&
-      matchesFilter(idea.audience, audienceFilter.value)
+  if (idea.audience === "Nurture") {
+    goals.push("increase-engagement", "improve-consistency", "build-authority");
+  }
+
+  if (idea.audience === "Convert") {
+    goals.push("sell-offer", "build-authority");
+  }
+
+  if (idea.tags.includes("consistency") || idea.tags.includes("planning")) {
+    goals.push("improve-consistency");
+  }
+
+  if (idea.engagementPotential === "High") {
+    goals.push("increase-engagement");
+  }
+
+  return goals;
+}
+
+function getPrimaryGoalLabel(idea) {
+  const ideaGoals = getIdeaGoals(idea);
+  const primaryGoal = ideaGoals[0];
+
+  return goalLabels[primaryGoal] || "Build Authority";
+}
+
+function filterIdeasByNiche(selectedNiche) {
+  const mappedNiche = nicheMap[selectedNiche];
+
+  return ideas.filter((idea) => idea.niche === mappedNiche);
+}
+
+function calculateMatchScore(idea, answers) {
+  let score = 0;
+
+  // Every idea that survives the first niche filter gets the niche points.
+  if (idea.niche === nicheMap[answers.niche]) {
+    score += 4;
+  }
+
+  if (getIdeaSkillLevel(idea) === answers.skillLevel) {
+    score += 3;
+  }
+
+  if (getIdeaFilmingTimeBucket(idea) === answers.filmingTime) {
+    score += 2;
+  }
+
+  if (idea.editingEffort.toLowerCase() === answers.editingEffort) {
+    score += 2;
+  }
+
+  if (getIdeaGoals(idea).includes(answers.goal)) {
+    score += 3;
+  }
+
+  if (answers.trendFriendly === "yes" && idea.trendFriendly) {
+    score += 1;
+  }
+
+  return score;
+}
+
+function buildRankedResults(answers) {
+  const nicheMatches = filterIdeasByNiche(answers.niche);
+  const displayedResults = nicheMatches
+    .map((idea) => ({
+      ...idea,
+      matchScore: calculateMatchScore(idea, answers),
+    }))
+    .sort((left, right) => {
+      if (right.matchScore !== left.matchScore) {
+        return right.matchScore - left.matchScore;
+      }
+
+      return left.title.localeCompare(right.title);
+    })
+    .slice(0, 6);
+
+  return {
+    totalMatchedIdeas: nicheMatches.length,
+    displayedResults,
+  };
+}
+
+function createResultCard(idea) {
+  const article = document.createElement("article");
+  article.className = "idea-card";
+  const trendBadge = idea.trendFriendly
+    ? '<span class="status-badge status-badge-trend">Trend-Friendly</span>'
+    : '<span class="status-badge status-badge-evergreen">Evergreen</span>';
+
+  article.innerHTML = `
+    <div class="card-head">
+      <div class="card-top">
+        <span class="tag">${idea.niche}</span>
+        ${trendBadge}
+      </div>
+      <div class="pill-group">
+        <span class="pill">Score ${idea.matchScore}</span>
+        <span class="pill">${idea.engagementPotential} engagement</span>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="idea-title">${idea.title}</h3>
+      <p class="idea-description">${idea.description}</p>
+    </div>
+    <dl class="idea-meta">
+      <div class="meta-item">
+        <dt>Format</dt>
+        <dd>${idea.format}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Skill Level</dt>
+        <dd>${getSkillLevelLabel(idea)}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Filming Time</dt>
+        <dd>${idea.filmingTime}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Editing</dt>
+        <dd>${idea.editingEffort}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Goal</dt>
+        <dd>${getPrimaryGoalLabel(idea)}</dd>
+      </div>
+      <div class="meta-item">
+        <dt>Match Score</dt>
+        <dd>${idea.matchScore}</dd>
+      </div>
+    </dl>
+    <p class="card-footer">${idea.tags.slice(0, 3).join(" • ")}</p>
+  `;
+
+  return article;
+}
+
+function renderEmptyState(message) {
+  resultsGrid.innerHTML = `<div class="empty-state">${message}</div>`;
+}
+
+function renderResults(results) {
+  resultsGrid.innerHTML = "";
+
+  if (results.length === 0) {
+    renderEmptyState(
+      "No matching ideas were found for that niche yet. Try a different niche or reset the questionnaire and answer again.",
     );
-  });
-}
-
-function renderCards(filteredIdeas) {
-  cardGrid.innerHTML = "";
-
-  if (filteredIdeas.length === 0) {
-    cardGrid.innerHTML =
-      '<div class="empty-state">No ideas match this filter set. Try widening the format or effort selection.</div>';
     return;
   }
 
-  filteredIdeas.forEach((idea) => {
-    const article = document.createElement("article");
-    article.className = "idea-card";
-
-    article.innerHTML = `
-      <div class="card-top">
-        <span class="tag">${idea.format}</span>
-        <div class="pill-group">
-          <span class="pill">${idea.difficulty} difficulty</span>
-          <span class="pill">${idea.audience}</span>
-        </div>
-      </div>
-      <div>
-        <h3 class="idea-title">${idea.title}</h3>
-        <p class="idea-description">${idea.description}</p>
-      </div>
-      <p class="card-footer">${idea.niche} • ${idea.filmingTime} filming • ${idea.editingEffort} edit • ${idea.engagementPotential} engagement</p>
-    `;
-
-    cardGrid.appendChild(article);
+  results.forEach((idea) => {
+    resultsGrid.appendChild(createResultCard(idea));
   });
 }
 
-function updateStats(filteredIdeas) {
-  visibleCount.textContent = filteredIdeas.length;
-  shortFormCount.textContent = filteredIdeas.filter(
-    (idea) => idea.format === "Shorts",
-  ).length;
-  lowEffortCount.textContent = filteredIdeas.filter(
-    (idea) => idea.difficulty === "Low",
-  ).length;
-  audienceFocus.textContent = new Set(filteredIdeas.map((idea) => idea.audience)).size;
-  resultsCopy.textContent = `Showing ${filteredIdeas.length} idea${
-    filteredIdeas.length === 1 ? "" : "s"
-  }`;
+function updateResultsSummary(results) {
+  if (results.length === 0) {
+    resultsSummary.textContent = "No results found for those answers.";
+    return;
+  }
+
+  resultsSummary.textContent = `Showing the top ${results.length} ideas ranked for your current answers.`;
 }
 
-function syncCatalog() {
-  const filteredIdeas = sortIdeas(filterIdeas());
-  renderCards(filteredIdeas);
-  updateStats(filteredIdeas);
+function getAverageEngagement(results) {
+  if (results.length === 0) {
+    return "-";
+  }
+
+  const totalScore = results.reduce(
+    (sum, idea) => sum + (engagementScores[idea.engagementPotential] || 0),
+    0,
+  );
+  const averageScore = totalScore / results.length;
+
+  return `${averageScore.toFixed(1)}/3`;
 }
 
-function resetFilters() {
-  searchInput.value = "";
-  formatFilter.value = "all";
-  effortFilter.value = "all";
-  audienceFilter.value = "all";
-  nicheFilter.value = "all";
-  sortSelect.value = "title-asc";
-  syncCatalog();
+function getTrendFriendlyCount(results) {
+  return results.filter((idea) => idea.trendFriendly).length;
 }
 
-function bindControls() {
-  [
-    searchInput,
-    nicheFilter,
-    formatFilter,
-    effortFilter,
-    audienceFilter,
-    sortSelect,
-  ].forEach((control) => {
-    control.addEventListener("input", syncCatalog);
-    control.addEventListener("change", syncCatalog);
+function updateStats(results, answers, totalMatchedIdeas) {
+  matchedTotal.textContent = totalMatchedIdeas;
+  selectedNiche.textContent = nicheMap[answers.niche] || "-";
+  averageEngagement.textContent = getAverageEngagement(results);
+  trendFriendlyCount.textContent = getTrendFriendlyCount(results);
+}
+
+function showResults() {
+  resultsSection.hidden = false;
+}
+
+function hideResults() {
+  resultsSection.hidden = true;
+  resultsGrid.innerHTML = "";
+  resultsSummary.textContent = "No results generated yet.";
+  matchedTotal.textContent = "0";
+  selectedNiche.textContent = "-";
+  averageEngagement.textContent = "-";
+  trendFriendlyCount.textContent = "0";
+}
+
+function handleQuestionnaireSubmit(event) {
+  event.preventDefault();
+
+  const answers = getFormAnswers();
+
+  if (!answers.niche) {
+    showResults();
+    updateResultsSummary([]);
+    updateStats([], answers, 0);
+    renderEmptyState("Choose a niche first so the app can narrow the idea list.");
+    return;
+  }
+
+  // The app filters by niche first, then scores the remaining ideas.
+  const { totalMatchedIdeas, displayedResults } = buildRankedResults(answers);
+
+  showResults();
+  updateResultsSummary(displayedResults);
+  updateStats(displayedResults, answers, totalMatchedIdeas);
+  renderResults(displayedResults);
+}
+
+function resetApp() {
+  hideResults();
+}
+
+function startOver() {
+  questionnaireForm.reset();
+  hideResults();
+}
+
+function bindEventListeners() {
+  questionnaireForm.addEventListener("submit", handleQuestionnaireSubmit);
+  questionnaireForm.addEventListener("reset", () => {
+    window.setTimeout(hideResults, 0);
   });
-
-  resetButton.addEventListener("click", resetFilters);
+  startOverButton.addEventListener("click", startOver);
+  clearQuestionnaireButton.addEventListener("click", resetApp);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  buildDynamicControls();
-  bindControls();
-  syncCatalog();
+  hideResults();
+  bindEventListeners();
 });
