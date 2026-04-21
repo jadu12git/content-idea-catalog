@@ -123,10 +123,15 @@ textarea {
 }
 
 .brand {
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo {
+  width: auto;
+  height: 92px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .topbar-meta {
@@ -141,12 +146,12 @@ textarea {
   position: relative;
   z-index: 1;
   max-width: 760px;
-  padding: 78px 0 34px;
+  padding: 78px 260px 34px 0;
 }
 
 .eyebrow {
   margin: 0 0 12px;
-  color: var(--primary);
+  color: #c62828;
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -217,6 +222,36 @@ h3 {
   gap: 12px;
 }
 
+.hero-actions {
+  position: absolute;
+  top: 420px;
+  right: -250px;;
+  width: 420px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.hero-actions .button {
+  width: 100%;
+  animation: heroButtonFloat 3.6s ease-in-out infinite;
+}
+
+.hero-actions .button:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+@keyframes heroButtonFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -243,13 +278,13 @@ h3 {
 
 .button-primary {
   color: #ffffff;
-  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-  box-shadow: 0 16px 36px rgba(52, 87, 213, 0.28);
+  background: linear-gradient(135deg, #2e8b57, #1f6b43);
+  box-shadow: 0 16px 36px rgba(46, 139, 87, 0.28);
 }
 
 .button-primary:hover,
 .button-primary:focus-visible {
-  box-shadow: 0 20px 40px rgba(52, 87, 213, 0.34);
+  box-shadow: 0 20px 40px rgba(46, 139, 87, 0.34);
 }
 
 .button-secondary {
@@ -298,7 +333,7 @@ h3 {
   min-width: 0;
   margin: 0;
   padding: 18px;
-  border: 1px solid var(--line);
+  border: 1px solid #f2c94c;
   border-radius: var(--radius-lg);
   background: var(--surface-strong);
   box-shadow: var(--shadow-sm);
@@ -383,6 +418,12 @@ select:focus,
   gap: 12px;
 }
 
+.multi-select-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .radio-option {
   display: flex;
   align-items: center;
@@ -414,8 +455,66 @@ select:focus,
   min-height: 18px;
   margin: 0;
   padding: 0;
+  appearance: auto;
   accent-color: var(--primary);
   box-shadow: none;
+}
+
+.radio-option:has(input:checked) {
+  border-color: rgba(52, 87, 213, 0.45);
+  background: rgba(52, 87, 213, 0.1);
+  box-shadow: 0 12px 24px rgba(52, 87, 213, 0.12);
+}
+
+.chip-option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.chip-option:hover {
+  transform: translateY(-1px);
+  border-color: rgba(52, 87, 213, 0.28);
+  background: #ffffff;
+}
+
+.chip-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip-option span {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.chip-option:has(input:checked) {
+  color: #ffffff;
+  border-color: rgba(52, 87, 213, 0.9);
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  box-shadow: 0 14px 28px rgba(52, 87, 213, 0.22);
+}
+
+.chip-option:focus-within {
+  outline: none;
+  border-color: rgba(52, 87, 213, 0.55);
+  box-shadow: 0 0 0 4px rgba(52, 87, 213, 0.14);
 }
 
 .form-actions {
@@ -466,12 +565,28 @@ select:focus,
   letter-spacing: -0.04em;
 }
 
+#selected-niche {
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .stat-label {
   font-size: 0.92rem;
 }
 
 .catalog {
   padding-top: 4px;
+}
+
+.results-toolbar {
+  margin-bottom: 18px;
+}
+
+.results-filter-field {
+  max-width: 320px;
 }
 
 .card-grid {
@@ -649,6 +764,18 @@ select:focus,
   .question-grid {
     grid-template-columns: 1fr;
   }
+
+  .hero-actions {
+    position: static;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hero-actions .button {
+    width: auto;
+    animation: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -683,6 +810,10 @@ select:focus,
   .radio-group,
   .idea-meta {
     grid-template-columns: 1fr;
+  }
+
+  .multi-select-group {
+    flex-direction: column;
   }
 
   .question-card,

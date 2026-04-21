@@ -1,3 +1,4 @@
+// 50 content ideas for creators in the this dataset.
 const ideas = [
   {
     title: "30-Day Reels Challenge Blueprint",
@@ -701,26 +702,26 @@ const ideas = [
   },
 ];
 
-const questionnaireForm = document.getElementById("questionnaire-form");
-const resultsSection = document.getElementById("results-section");
-const resultsGrid = document.getElementById("results-grid");
-const resultsSummary = document.getElementById("results-summary");
+const dom = {
+  form: document.getElementById("questionnaire-form"),
+  resultsSection: document.getElementById("results-section"),
+  resultsGrid: document.getElementById("results-grid"),
+  resultsSummary: document.getElementById("results-summary"),
+  resultsFilter: document.getElementById("results-filter"),
+  matchedTotal: document.getElementById("matched-total"),
+  selectedNiche: document.getElementById("selected-niche"),
+  averageEngagement: document.getElementById("average-engagement"),
+  trendFriendlyCount: document.getElementById("trend-friendly-count"),
+  clearButton: document.getElementById("clear-questionnaire"),
+  startOverButton: document.getElementById("start-over-button"),
+  fields: {
+    skillLevel: document.getElementById("skillLevel"),
+    filmingTime: document.getElementById("filmingTime"),
+    editingEffort: document.getElementById("editingEffort"),
+  },
+};
 
-const matchedTotal = document.getElementById("matched-total");
-const selectedNiche = document.getElementById("selected-niche");
-const averageEngagement = document.getElementById("average-engagement");
-const trendFriendlyCount = document.getElementById("trend-friendly-count");
-
-const clearQuestionnaireButton = document.getElementById("clear-questionnaire");
-const startOverButton = document.getElementById("start-over-button");
-
-const nicheField = document.getElementById("niche");
-const skillLevelField = document.getElementById("skillLevel");
-const filmingTimeField = document.getElementById("filmingTime");
-const editingEffortField = document.getElementById("editingEffort");
-const goalField = document.getElementById("goal");
-
-const nicheMap = {
+const NICHE_LABELS = {
   "creator-education": "Creator Education",
   "youtube-growth": "YouTube Growth",
   "short-form-strategy": "Short-Form Strategy",
@@ -729,13 +730,22 @@ const nicheMap = {
   monetization: "Monetization",
 };
 
-const engagementScores = {
+const MATCH_SCORE_VALUES = {
+  niche: 4,
+  skillLevel: 3,
+  filmingTime: 2,
+  editingEffort: 2,
+  goal: 3,
+  trendFriendly: 1,
+};
+
+const ENGAGEMENT_SCORES = {
   Low: 1,
   Medium: 2,
   High: 3,
 };
 
-const goalLabels = {
+const GOAL_LABELS = {
   "grow-audience": "Grow Audience",
   "increase-engagement": "Increase Engagement",
   "improve-consistency": "Improve Consistency",
@@ -743,42 +753,66 @@ const goalLabels = {
   "build-authority": "Build Authority",
 };
 
-function getFormAnswers() {
-  const trendFriendlyChoice = questionnaireForm.querySelector(
+const SKILL_LEVEL_BY_DIFFICULTY = {
+  Low: "beginner",
+  Medium: "intermediate",
+  High: "advanced",
+};
+
+const SKILL_LEVEL_LABELS = {
+  beginner: "Beginner",
+  intermediate: "Intermediate",
+  advanced: "Advanced",
+};
+
+const EMPTY_RESULTS_MESSAGE =
+  "No matching ideas were found for that niche yet. Try a different niche or reset the questionnaire and answer again.";
+
+const MISSING_NICHE_MESSAGE =
+  "Choose a niche first so the app can narrow the idea list.";
+
+const FILTER_EMPTY_MESSAGE =
+  "No suggested ideas match the filter you selected. Try a different filter option.";
+
+const resultsViewState = {
+  answers: null,
+  displayedResults: [],
+};
+
+function readFormAnswers() {
+  const selectedTrendPreference = dom.form.querySelector(
     'input[name="trendFriendly"]:checked',
+  );
+  const selectedNiches = Array.from(
+    dom.form.querySelectorAll('input[name="niches"]:checked'),
+    (input) => input.value,
+  );
+  const selectedGoals = Array.from(
+    dom.form.querySelectorAll('input[name="goals"]:checked'),
+    (input) => input.value,
   );
 
   return {
-    niche: nicheField.value,
-    skillLevel: skillLevelField.value,
-    filmingTime: filmingTimeField.value,
-    editingEffort: editingEffortField.value,
-    goal: goalField.value,
-    trendFriendly: trendFriendlyChoice ? trendFriendlyChoice.value : "",
+    niches: selectedNiches,
+    skillLevel: dom.fields.skillLevel.value,
+    filmingTime: dom.fields.filmingTime.value,
+    editingEffort: dom.fields.editingEffort.value,
+    goals: selectedGoals,
+    trendFriendly: selectedTrendPreference
+      ? selectedTrendPreference.value === "yes"
+      : false,
   };
 }
 
-function getIdeaSkillLevel(idea) {
-  const difficultyMap = {
-    Low: "beginner",
-    Medium: "intermediate",
-    High: "advanced",
-  };
-
-  return difficultyMap[idea.difficulty] || "";
+function getIdeaSkillLevelId(idea) {
+  return SKILL_LEVEL_BY_DIFFICULTY[idea.difficulty] || "";
 }
 
 function getSkillLevelLabel(idea) {
-  const skillLevelLabels = {
-    beginner: "Beginner",
-    intermediate: "Intermediate",
-    advanced: "Advanced",
-  };
-
-  return skillLevelLabels[getIdeaSkillLevel(idea)] || idea.difficulty;
+  return SKILL_LEVEL_LABELS[getIdeaSkillLevelId(idea)] || idea.difficulty;
 }
 
-function getIdeaFilmingTimeBucket(idea) {
+function getIdeaFilmingTimeId(idea) {
   const minutes = Number.parseInt(idea.filmingTime, 10);
 
   if (minutes <= 15) {
@@ -792,79 +826,81 @@ function getIdeaFilmingTimeBucket(idea) {
   return "high";
 }
 
-function getIdeaGoals(idea) {
-  const goals = [];
+function getIdeaGoalIds(idea) {
+  const goalIds = [];
 
   if (idea.audience === "Attract") {
-    goals.push("grow-audience", "build-authority");
+    goalIds.push("grow-audience", "build-authority");
   }
 
   if (idea.audience === "Nurture") {
-    goals.push("increase-engagement", "improve-consistency", "build-authority");
+    goalIds.push("increase-engagement", "improve-consistency", "build-authority");
   }
 
   if (idea.audience === "Convert") {
-    goals.push("sell-offer", "build-authority");
+    goalIds.push("sell-offer", "build-authority");
   }
 
   if (idea.tags.includes("consistency") || idea.tags.includes("planning")) {
-    goals.push("improve-consistency");
+    goalIds.push("improve-consistency");
   }
 
   if (idea.engagementPotential === "High") {
-    goals.push("increase-engagement");
+    goalIds.push("increase-engagement");
   }
 
-  return goals;
+  return goalIds;
 }
 
-function getPrimaryGoalLabel(idea) {
-  const ideaGoals = getIdeaGoals(idea);
-  const primaryGoal = ideaGoals[0];
-
-  return goalLabels[primaryGoal] || "Build Authority";
+function getNicheLabel(nicheId) {
+  return NICHE_LABELS[nicheId] || "";
 }
 
-function filterIdeasByNiche(selectedNiche) {
-  const mappedNiche = nicheMap[selectedNiche];
+function getNicheLabels(nicheIds) {
+  return nicheIds.map((nicheId) => getNicheLabel(nicheId)).filter(Boolean);
+}
 
-  return ideas.filter((idea) => idea.niche === mappedNiche);
+function filterIdeasForSelectedNiches(nicheIds) {
+  const selectedNicheLabels = getNicheLabels(nicheIds);
+
+  return ideas.filter((idea) => selectedNicheLabels.includes(idea.niche));
 }
 
 function calculateMatchScore(idea, answers) {
   let score = 0;
+  const selectedNicheLabels = getNicheLabels(answers.niches);
 
   // Every idea that survives the first niche filter gets the niche points.
-  if (idea.niche === nicheMap[answers.niche]) {
-    score += 4;
+  if (selectedNicheLabels.includes(idea.niche)) {
+    score += MATCH_SCORE_VALUES.niche;
   }
 
-  if (getIdeaSkillLevel(idea) === answers.skillLevel) {
-    score += 3;
+  if (getIdeaSkillLevelId(idea) === answers.skillLevel) {
+    score += MATCH_SCORE_VALUES.skillLevel;
   }
 
-  if (getIdeaFilmingTimeBucket(idea) === answers.filmingTime) {
-    score += 2;
+  if (getIdeaFilmingTimeId(idea) === answers.filmingTime) {
+    score += MATCH_SCORE_VALUES.filmingTime;
   }
 
   if (idea.editingEffort.toLowerCase() === answers.editingEffort) {
-    score += 2;
+    score += MATCH_SCORE_VALUES.editingEffort;
   }
 
-  if (getIdeaGoals(idea).includes(answers.goal)) {
-    score += 3;
+  if (answers.goals.some((goalId) => getIdeaGoalIds(idea).includes(goalId))) {
+    score += MATCH_SCORE_VALUES.goal;
   }
 
-  if (answers.trendFriendly === "yes" && idea.trendFriendly) {
-    score += 1;
+  if (answers.trendFriendly && idea.trendFriendly) {
+    score += MATCH_SCORE_VALUES.trendFriendly;
   }
 
   return score;
 }
 
 function buildRankedResults(answers) {
-  const nicheMatches = filterIdeasByNiche(answers.niche);
-  const displayedResults = nicheMatches
+  const nicheMatchedIdeas = filterIdeasForSelectedNiches(answers.niches);
+  const displayedIdeas = nicheMatchedIdeas
     .map((idea) => ({
       ...idea,
       matchScore: calculateMatchScore(idea, answers),
@@ -879,23 +915,110 @@ function buildRankedResults(answers) {
     .slice(0, 6);
 
   return {
-    totalMatchedIdeas: nicheMatches.length,
-    displayedResults,
+    totalMatchedIdeas: nicheMatchedIdeas.length,
+    displayedResults: displayedIdeas,
   };
 }
 
-function createResultCard(idea) {
-  const article = document.createElement("article");
-  article.className = "idea-card";
-  const trendBadge = idea.trendFriendly
+function getGoalLabel(goalId) {
+  return GOAL_LABELS[goalId] || "";
+}
+
+function getResultsFilterOptions(answers) {
+  const nicheOptions = answers.niches.map((nicheId) => ({
+    value: `niche:${nicheId}`,
+    label: `Niche: ${getNicheLabel(nicheId)}`,
+  }));
+  const goalOptions = answers.goals.map((goalId) => ({
+    value: `goal:${goalId}`,
+    label: `Goal: ${getGoalLabel(goalId)}`,
+  }));
+
+  return [
+    { value: "all", label: "All suggested ideas" },
+    { groupLabel: "Niche", options: nicheOptions },
+    { groupLabel: "Goal", options: goalOptions },
+  ];
+}
+
+function populateResultsFilter(answers) {
+  const filterOptions = getResultsFilterOptions(answers);
+
+  dom.resultsFilter.innerHTML = "";
+
+  filterOptions.forEach((item) => {
+    if (item.value) {
+      const option = document.createElement("option");
+      option.value = item.value;
+      option.textContent = item.label;
+      dom.resultsFilter.appendChild(option);
+      return;
+    }
+
+    if (item.options.length === 0) {
+      return;
+    }
+
+    const optionGroup = document.createElement("optgroup");
+    optionGroup.label = item.groupLabel;
+
+    item.options.forEach((optionConfig) => {
+      const option = document.createElement("option");
+      option.value = optionConfig.value;
+      option.textContent = optionConfig.label.replace(`${item.groupLabel}: `, "");
+      optionGroup.appendChild(option);
+    });
+
+    dom.resultsFilter.appendChild(optionGroup);
+  });
+
+  dom.resultsFilter.value = "all";
+}
+
+function filterDisplayedResultsBySelection(results, filterValue) {
+  if (filterValue === "all") {
+    return results;
+  }
+
+  const [filterType, filterId] = filterValue.split(":");
+
+  if (filterType === "niche") {
+    return results.filter((idea) => idea.niche === getNicheLabel(filterId));
+  }
+
+  if (filterType === "goal") {
+    return results.filter((idea) => getIdeaGoalIds(idea).includes(filterId));
+  }
+
+  return results;
+}
+
+function getMatchedGoalLabel(idea, selectedGoalIds) {
+  const matchingGoalId = selectedGoalIds.find((goalId) =>
+    getIdeaGoalIds(idea).includes(goalId),
+  );
+
+  if (matchingGoalId) {
+    return getGoalLabel(matchingGoalId);
+  }
+
+  return getGoalLabel(selectedGoalIds[0]) || "Not specified";
+}
+
+function createResultCard(idea, answers) {
+  const card = document.createElement("article");
+  card.className = "idea-card";
+
+  const trendBadgeMarkup = idea.trendFriendly
     ? '<span class="status-badge status-badge-trend">Trend-Friendly</span>'
     : '<span class="status-badge status-badge-evergreen">Evergreen</span>';
+  const matchedGoalLabel = getMatchedGoalLabel(idea, answers.goals);
 
-  article.innerHTML = `
+  card.innerHTML = `
     <div class="card-head">
       <div class="card-top">
         <span class="tag">${idea.niche}</span>
-        ${trendBadge}
+        ${trendBadgeMarkup}
       </div>
       <div class="pill-group">
         <span class="pill">Score ${idea.matchScore}</span>
@@ -926,7 +1049,7 @@ function createResultCard(idea) {
       </div>
       <div class="meta-item">
         <dt>Goal</dt>
-        <dd>${getPrimaryGoalLabel(idea)}</dd>
+        <dd>${matchedGoalLabel}</dd>
       </div>
       <div class="meta-item">
         <dt>Match Score</dt>
@@ -936,35 +1059,33 @@ function createResultCard(idea) {
     <p class="card-footer">${idea.tags.slice(0, 3).join(" • ")}</p>
   `;
 
-  return article;
+  return card;
 }
 
 function renderEmptyState(message) {
-  resultsGrid.innerHTML = `<div class="empty-state">${message}</div>`;
+  dom.resultsGrid.innerHTML = `<div class="empty-state">${message}</div>`;
 }
 
-function renderResults(results) {
-  resultsGrid.innerHTML = "";
+function renderResults(results, answers, emptyMessage = EMPTY_RESULTS_MESSAGE) {
+  dom.resultsGrid.innerHTML = "";
 
   if (results.length === 0) {
-    renderEmptyState(
-      "No matching ideas were found for that niche yet. Try a different niche or reset the questionnaire and answer again.",
-    );
+    renderEmptyState(emptyMessage);
     return;
   }
 
   results.forEach((idea) => {
-    resultsGrid.appendChild(createResultCard(idea));
+    dom.resultsGrid.appendChild(createResultCard(idea, answers));
   });
 }
 
 function updateResultsSummary(results) {
   if (results.length === 0) {
-    resultsSummary.textContent = "No results found for those answers.";
+    dom.resultsSummary.textContent = "No results found for those answers.";
     return;
   }
 
-  resultsSummary.textContent = `Showing the top ${results.length} ideas ranked for your current answers.`;
+  dom.resultsSummary.textContent = `Showing the top ${results.length} ideas ranked for your current answers.`;
 }
 
 function getAverageEngagement(results) {
@@ -973,7 +1094,7 @@ function getAverageEngagement(results) {
   }
 
   const totalScore = results.reduce(
-    (sum, idea) => sum + (engagementScores[idea.engagementPotential] || 0),
+    (sum, idea) => sum + (ENGAGEMENT_SCORES[idea.engagementPotential] || 0),
     0,
   );
   const averageScore = totalScore / results.length;
@@ -986,64 +1107,92 @@ function getTrendFriendlyCount(results) {
 }
 
 function updateStats(results, answers, totalMatchedIdeas) {
-  matchedTotal.textContent = totalMatchedIdeas;
-  selectedNiche.textContent = nicheMap[answers.niche] || "-";
-  averageEngagement.textContent = getAverageEngagement(results);
-  trendFriendlyCount.textContent = getTrendFriendlyCount(results);
+  dom.matchedTotal.textContent = totalMatchedIdeas;
+  dom.selectedNiche.textContent = getNicheLabels(answers.niches).join(", ") || "-";
+  dom.averageEngagement.textContent = getAverageEngagement(results);
+  dom.trendFriendlyCount.textContent = getTrendFriendlyCount(results);
+}
+
+function resetSummaryStats() {
+  dom.matchedTotal.textContent = "0";
+  dom.selectedNiche.textContent = "-";
+  dom.averageEngagement.textContent = "-";
+  dom.trendFriendlyCount.textContent = "0";
 }
 
 function showResults() {
-  resultsSection.hidden = false;
+  dom.resultsSection.hidden = false;
 }
 
 function hideResults() {
-  resultsSection.hidden = true;
-  resultsGrid.innerHTML = "";
-  resultsSummary.textContent = "No results generated yet.";
-  matchedTotal.textContent = "0";
-  selectedNiche.textContent = "-";
-  averageEngagement.textContent = "-";
-  trendFriendlyCount.textContent = "0";
+  dom.resultsSection.hidden = true;
+  dom.resultsGrid.innerHTML = "";
+  dom.resultsSummary.textContent = "No results generated yet.";
+  resetSummaryStats();
+  dom.resultsFilter.innerHTML = '<option value="all">All suggested ideas</option>';
+  resultsViewState.answers = null;
+  resultsViewState.displayedResults = [];
 }
 
-function handleQuestionnaireSubmit(event) {
+function showMissingNicheState(answers) {
+  showResults();
+  updateResultsSummary([]);
+  updateStats([], answers, 0);
+  renderEmptyState(MISSING_NICHE_MESSAGE);
+}
+
+function handleFormSubmit(event) {
   event.preventDefault();
 
-  const answers = getFormAnswers();
+  const answers = readFormAnswers();
 
-  if (!answers.niche) {
-    showResults();
-    updateResultsSummary([]);
-    updateStats([], answers, 0);
-    renderEmptyState("Choose a niche first so the app can narrow the idea list.");
+  if (answers.niches.length === 0) {
+    showMissingNicheState(answers);
     return;
   }
 
   // The app filters by niche first, then scores the remaining ideas.
   const { totalMatchedIdeas, displayedResults } = buildRankedResults(answers);
+  resultsViewState.answers = answers;
+  resultsViewState.displayedResults = displayedResults;
+  populateResultsFilter(answers);
 
   showResults();
   updateResultsSummary(displayedResults);
   updateStats(displayedResults, answers, totalMatchedIdeas);
-  renderResults(displayedResults);
+  renderResults(displayedResults, answers);
 }
 
-function resetApp() {
+function handleResultsFilterChange() {
+  if (!resultsViewState.answers) {
+    return;
+  }
+
+  const filteredResults = filterDisplayedResultsBySelection(
+    resultsViewState.displayedResults,
+    dom.resultsFilter.value,
+  );
+
+  renderResults(filteredResults, resultsViewState.answers, FILTER_EMPTY_MESSAGE);
+}
+
+function clearResultsOnly() {
   hideResults();
 }
 
-function startOver() {
-  questionnaireForm.reset();
+function resetFormAndResults() {
+  dom.form.reset();
   hideResults();
 }
 
 function bindEventListeners() {
-  questionnaireForm.addEventListener("submit", handleQuestionnaireSubmit);
-  questionnaireForm.addEventListener("reset", () => {
+  dom.form.addEventListener("submit", handleFormSubmit);
+  dom.form.addEventListener("reset", () => {
     window.setTimeout(hideResults, 0);
   });
-  startOverButton.addEventListener("click", startOver);
-  clearQuestionnaireButton.addEventListener("click", resetApp);
+  dom.resultsFilter.addEventListener("change", handleResultsFilterChange);
+  dom.startOverButton.addEventListener("click", resetFormAndResults);
+  dom.clearButton.addEventListener("click", clearResultsOnly);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

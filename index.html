@@ -15,10 +15,10 @@
     <div class="page-shell">
       <header class="hero">
         <nav class="topbar" aria-label="Primary">
-          <a class="brand" href="#top">Idea Atlas</a>
+          <a class="brand" href="#top" aria-label="Idea Atlas home">
+            <img class="brand-logo" src="assets/website_logo.jpg" alt="Idea Atlas logo" />
+          </a>
           <div class="topbar-meta">
-            <span>Creator Idea Matcher</span>
-            <span>One-page planner</span>
           </div>
         </nav>
 
@@ -61,18 +61,62 @@
             <div class="question-grid">
               <fieldset class="question-card" id="question-niche-group">
                 <legend class="field-label">1. What type of content do you create?</legend>
-                <label class="select-field" for="niche">
-                  <span class="field-label">Niche</span>
-                  <select id="niche" name="niche">
-                    <option value="">Select your niche</option>
-                    <option value="creator-education">Creator Education</option>
-                    <option value="youtube-growth">YouTube Growth</option>
-                    <option value="short-form-strategy">Short-Form Strategy</option>
-                    <option value="video-editing">Video Editing</option>
-                    <option value="email-marketing">Email Marketing</option>
-                    <option value="monetization">Monetization</option>
-                  </select>
-                </label>
+                <div class="multi-select-group" id="niches-group" aria-label="Niche options">
+                  <label class="chip-option" for="niche-creator-education">
+                    <input
+                      id="niche-creator-education"
+                      type="checkbox"
+                      name="niches"
+                      value="creator-education"
+                    />
+                    <span>Creator Education</span>
+                  </label>
+                  <label class="chip-option" for="niche-youtube-growth">
+                    <input
+                      id="niche-youtube-growth"
+                      type="checkbox"
+                      name="niches"
+                      value="youtube-growth"
+                    />
+                    <span>YouTube Growth</span>
+                  </label>
+                  <label class="chip-option" for="niche-short-form-strategy">
+                    <input
+                      id="niche-short-form-strategy"
+                      type="checkbox"
+                      name="niches"
+                      value="short-form-strategy"
+                    />
+                    <span>Short-Form Strategy</span>
+                  </label>
+                  <label class="chip-option" for="niche-video-editing">
+                    <input
+                      id="niche-video-editing"
+                      type="checkbox"
+                      name="niches"
+                      value="video-editing"
+                    />
+                    <span>Video Editing</span>
+                  </label>
+                  <label class="chip-option" for="niche-email-marketing">
+                    <input
+                      id="niche-email-marketing"
+                      type="checkbox"
+                      name="niches"
+                      value="email-marketing"
+                    />
+                    <span>Email Marketing</span>
+                  </label>
+                  <label class="chip-option" for="niche-monetization">
+                    <input
+                      id="niche-monetization"
+                      type="checkbox"
+                      name="niches"
+                      value="monetization"
+                    />
+                    <span>Monetization</span>
+                  </label>
+                </div>
               </fieldset>
 
               <fieldset class="question-card" id="question-skill-level-group">
@@ -116,17 +160,53 @@
 
               <fieldset class="question-card" id="question-goal-group">
                 <legend class="field-label">5. What is your main goal right now?</legend>
-                <label class="select-field" for="goal">
-                  <span class="field-label">Goal</span>
-                  <select id="goal" name="goal">
-                    <option value="">Select your goal</option>
-                    <option value="grow-audience">Grow audience</option>
-                    <option value="increase-engagement">Increase engagement</option>
-                    <option value="improve-consistency">Improve consistency</option>
-                    <option value="sell-offer">Sell an offer</option>
-                    <option value="build-authority">Build authority</option>
-                  </select>
-                </label>
+                <div class="multi-select-group" id="goals-group" aria-label="Goal options">
+                  <label class="chip-option" for="goal-grow-audience">
+                    <input
+                      id="goal-grow-audience"
+                      type="checkbox"
+                      name="goals"
+                      value="grow-audience"
+                    />
+                    <span>Grow Audience</span>
+                  </label>
+                  <label class="chip-option" for="goal-increase-engagement">
+                    <input
+                      id="goal-increase-engagement"
+                      type="checkbox"
+                      name="goals"
+                      value="increase-engagement"
+                    />
+                    <span>Increase Engagement</span>
+                  </label>
+                  <label class="chip-option" for="goal-improve-consistency">
+                    <input
+                      id="goal-improve-consistency"
+                      type="checkbox"
+                      name="goals"
+                      value="improve-consistency"
+                    />
+                    <span>Improve Consistency</span>
+                  </label>
+                  <label class="chip-option" for="goal-sell-offer">
+                    <input
+                      id="goal-sell-offer"
+                      type="checkbox"
+                      name="goals"
+                      value="sell-offer"
+                    />
+                    <span>Sell an Offer</span>
+                  </label>
+                  <label class="chip-option" for="goal-build-authority">
+                    <input
+                      id="goal-build-authority"
+                      type="checkbox"
+                      name="goals"
+                      value="build-authority"
+                    />
+                    <span>Build Authority</span>
+                  </label>
+                </div>
               </fieldset>
 
               <fieldset class="question-card" id="question-trend-friendly-group">
@@ -202,6 +282,14 @@
             <div class="section-heading">
               <p class="eyebrow">Idea List</p>
               <h3 id="results-list-title">Suggested content ideas</h3>
+            </div>
+            <div class="results-toolbar" id="results-toolbar">
+              <label class="select-field results-filter-field" for="results-filter">
+                <span class="field-label">Filter Suggested Ideas</span>
+                <select id="results-filter" name="resultsFilter">
+                  <option value="all">All suggested ideas</option>
+                </select>
+              </label>
             </div>
             <div class="card-grid" id="results-grid" aria-live="polite"></div>
           </section>
