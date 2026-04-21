@@ -1,1201 +1,817 @@
-// 50 content ideas for creators in the this dataset.
-const ideas = [
-  {
-    title: "30-Day Reels Challenge Blueprint",
-    niche: "Creator Education",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Break down a month-long short-form challenge into daily prompts creators can save and follow.",
-    tags: ["challenge", "reels", "consistency", "planning"],
-  },
-  {
-    title: "My 3-Step Thumbnail Fix",
-    niche: "YouTube Growth",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "15 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Show the fast visual checks you use to improve click-through without redesigning every thumbnail from scratch.",
-    tags: ["thumbnails", "ctr", "youtube", "design"],
-  },
-  {
-    title: "What I’d Do With My First 1,000 Subscribers",
-    niche: "YouTube Growth",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "45 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Attract",
-    description:
-      "Outline the systems, experiments, and content priorities you would focus on with an early-stage audience.",
-    tags: ["subscribers", "growth", "beginner", "strategy"],
-  },
-  {
-    title: "Weekly Creator CEO Note",
-    niche: "Newsletter Growth",
-    format: "Newsletter",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Share one experiment, one lesson, and one next move to build trust through visible iteration.",
-    tags: ["newsletter", "reflection", "systems", "trust"],
-  },
-  {
-    title: "Live Channel Audit for a Subscriber",
-    niche: "Creator Education",
-    format: "Live",
-    difficulty: "High",
-    filmingTime: "60 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Review a real creator profile in public and explain the exact changes that would improve clarity and conversion.",
-    tags: ["audit", "live", "channel", "conversion"],
-  },
-  {
-    title: "Five Hooks for One Topic",
-    niche: "Short-Form Strategy",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Teach creators how to extract multiple strong openings from a single idea instead of chasing more ideas.",
-    tags: ["hooks", "copywriting", "carousel", "shorts"],
-  },
-  {
-    title: "The B-Roll I Reuse Every Week",
-    niche: "Video Workflow",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "20 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: true,
-    audience: "Nurture",
-    description:
-      "Show a repeatable library of shots that makes short-form content faster to produce.",
-    tags: ["b-roll", "workflow", "batching", "efficiency"],
-  },
-  {
-    title: "Behind the Scenes of a Sponsorship Deck",
-    niche: "Monetization",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "40 min",
-    editingEffort: "Medium",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Walk through the slides, positioning, and proof points that make a sponsorship pitch credible.",
-    tags: ["sponsorship", "deck", "brand deals", "income"],
-  },
-  {
-    title: "Content Calendar in 15 Minutes",
-    niche: "Productivity for Creators",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "15 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Demonstrate a lightweight planning workflow for mapping a week of posts without overcomplicating the process.",
-    tags: ["calendar", "planning", "productivity", "content"],
-  },
-  {
-    title: "Creator Burnout Warning Signs",
-    niche: "Creator Mindset",
-    format: "Newsletter",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Write a candid note on the patterns that signal overproduction and how to reset before momentum breaks.",
-    tags: ["burnout", "mindset", "sustainability", "creator life"],
-  },
-  {
-    title: "Before vs After: Editing One Talking Head Clip",
-    niche: "Video Editing",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "35 min",
-    editingEffort: "High",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Use a real clip to demonstrate pacing, captions, cut points, and visual emphasis choices.",
-    tags: ["editing", "before after", "talking head", "tutorial"],
-  },
-  {
-    title: "Three CTAs That Don’t Sound Desperate",
-    niche: "Audience Conversion",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Convert",
-    description:
-      "Teach subtle call-to-action structures that feel helpful while still moving viewers toward the next step.",
-    tags: ["cta", "conversion", "copywriting", "sales"],
-  },
-  {
-    title: "How I Research Trends Without Copying Them",
-    niche: "Trend Strategy",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "30 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Explain your process for spotting patterns, extracting principles, and remixing them into original content.",
-    tags: ["trends", "research", "originality", "strategy"],
-  },
-  {
-    title: "The Creator Dashboard I Check Every Monday",
-    niche: "Analytics",
-    format: "Carousel",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Turn your weekly metrics review into a clean framework your audience can borrow.",
-    tags: ["analytics", "dashboard", "metrics", "systems"],
-  },
-  {
-    title: "Hot Take: Most Creators Post Too Randomly",
-    niche: "Content Strategy",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "10 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Lead with a strong opinion, then back it up with a simple framework for thematic consistency.",
-    tags: ["opinion", "strategy", "consistency", "hooks"],
-  },
-  {
-    title: "Anatomy of a High-Converting Welcome Email",
-    niche: "Email Marketing",
-    format: "Newsletter",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Break down the sections of a welcome email that sets expectations and nudges readers toward your offer.",
-    tags: ["email", "welcome sequence", "conversion", "copy"],
-  },
-  {
-    title: "One Comment Turned Into Four Posts",
-    niche: "Community Building",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "10 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Nurture",
-    description:
-      "Show how audience questions can become a repeatable source of practical content ideas.",
-    tags: ["comments", "community", "repurposing", "ideas"],
-  },
-  {
-    title: "Pricing Mistakes New Creators Make",
-    niche: "Monetization",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "40 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Cover the common ways creators underprice services, retainers, and brand collaborations.",
-    tags: ["pricing", "offers", "freelance", "revenue"],
-  },
-  {
-    title: "My Script Template for Educational Reels",
-    niche: "Short-Form Strategy",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Share a swipeable scripting formula for building concise, useful short-form posts.",
-    tags: ["script", "template", "reels", "education"],
-  },
-  {
-    title: "Film With Me: Batch 7 Videos in One Hour",
-    niche: "Video Workflow",
-    format: "Live",
-    difficulty: "High",
-    filmingTime: "60 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Nurture",
-    description:
-      "Take viewers through a real batching session to demystify efficient content production.",
-    tags: ["batching", "filming", "live", "workflow"],
-  },
-  {
-    title: "The First Offer I’d Sell to a Small Audience",
-    niche: "Offer Creation",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "35 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Explain how to choose a simple, credible starter offer before building a complex product stack.",
-    tags: ["offer", "beginner business", "product", "sales"],
-  },
-  {
-    title: "Three Ways to Reuse a Long Video",
-    niche: "Repurposing",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "12 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Show creators how one long-form asset can become clips, carousels, and email content.",
-    tags: ["repurpose", "long-form", "clips", "efficiency"],
-  },
-  {
-    title: "The KPI I Ignore on Purpose",
-    niche: "Analytics",
-    format: "Newsletter",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Challenge a popular metric and explain why it does not help you make better content decisions.",
-    tags: ["kpi", "analytics", "focus", "decision making"],
-  },
-  {
-    title: "From Trend Audio to Original Angle",
-    niche: "Trend Strategy",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "15 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Use a current short-form pattern to show how to add commentary and originality instead of mimicry.",
-    tags: ["trend audio", "original angle", "reels", "hooks"],
-  },
-  {
-    title: "What a Brand Looks for Before Saying Yes",
-    niche: "Brand Deals",
-    format: "Carousel",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Outline the signals that make creators easier to trust from a sponsor’s perspective.",
-    tags: ["brand deals", "trust", "sponsorship", "pitching"],
-  },
-  {
-    title: "My Home Studio Under $300",
-    niche: "Creator Gear",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "50 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Attract",
-    description:
-      "Show a budget-conscious recording setup and explain what matters more than expensive equipment.",
-    tags: ["gear", "studio", "budget", "setup"],
-  },
-  {
-    title: "The One-Sentence Positioning Test",
-    niche: "Personal Branding",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Help creators tighten their profile and bio messaging with a simple clarity test.",
-    tags: ["positioning", "branding", "bio", "clarity"],
-  },
-  {
-    title: "Editing Shortcuts I Wish I Learned Earlier",
-    niche: "Video Editing",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "10 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Package a few concrete editing moves into a quick win format that feels instantly useful.",
-    tags: ["editing shortcuts", "premiere", "final cut", "speed"],
-  },
-  {
-    title: "Monthly Creator Reset Checklist",
-    niche: "Productivity for Creators",
-    format: "Newsletter",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Send a structured end-of-month review that helps your audience clean up projects and plan ahead.",
-    tags: ["checklist", "monthly reset", "planning", "workflow"],
-  },
-  {
-    title: "Breakdown of a Viral Hook That Actually Teaches",
-    niche: "Short-Form Strategy",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "30 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Analyze why a strong opening works and connect it to instructional content, not just entertainment.",
-    tags: ["viral hook", "analysis", "education", "retention"],
-  },
-  {
-    title: "How I Turn Testimonials Into Content",
-    niche: "Audience Conversion",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Transform client or student results into proof-based content that still feels useful.",
-    tags: ["testimonials", "social proof", "conversion", "case study"],
-  },
-  {
-    title: "The Creator Skill Stack for 2026",
-    niche: "Creator Education",
-    format: "YouTube",
-    difficulty: "High",
-    filmingTime: "55 min",
-    editingEffort: "High",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Attract",
-    description:
-      "Map the skills creators need now across storytelling, packaging, audience building, and monetization.",
-    tags: ["skills", "future of creators", "career", "education"],
-  },
-  {
-    title: "A Better Way to Ask for Comments",
-    niche: "Community Building",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "10 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Nurture",
-    description:
-      "Replace weak engagement bait with prompts that generate useful, natural discussion.",
-    tags: ["comments", "engagement", "community", "prompts"],
-  },
-  {
-    title: "My Creator CRM in Notion",
-    niche: "Systems",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "45 min",
-    editingEffort: "Medium",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Walk through the simple database you use to track sponsors, collaborators, and content follow-ups.",
-    tags: ["notion", "crm", "systems", "operations"],
-  },
-  {
-    title: "Content Ideas Hidden in Your Analytics",
-    niche: "Analytics",
-    format: "Carousel",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Show how high-retention topics and repeated search queries can guide your next batch of posts.",
-    tags: ["analytics", "ideation", "content planning", "retention"],
-  },
-  {
-    title: "How I Prep for a Collab Call",
-    niche: "Networking",
-    format: "Newsletter",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Share the agenda, prep notes, and follow-up structure that turns casual creator calls into real opportunities.",
-    tags: ["collab", "networking", "relationships", "prep"],
-  },
-  {
-    title: "Three Formats I’d Stop Using This Year",
-    niche: "Content Strategy",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "15 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Use a strong opinion to discuss stale content patterns and what to replace them with.",
-    tags: ["content formats", "opinion", "strategy", "refresh"],
-  },
-  {
-    title: "Creator Q&A: Ask Me Anything About Growth",
-    niche: "Creator Education",
-    format: "Live",
-    difficulty: "Medium",
-    filmingTime: "45 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Run an interactive session that surfaces real audience pain points and doubles as an idea mine.",
-    tags: ["q&a", "live", "growth", "community"],
-  },
-  {
-    title: "Why Your Best Content Sometimes Flops",
-    niche: "Creator Mindset",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "30 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Explain the difference between quality, packaging, timing, and distribution so creators interpret results better.",
-    tags: ["mindset", "distribution", "flops", "analysis"],
-  },
-  {
-    title: "Three Lead Magnet Ideas for Experts",
-    niche: "Email Marketing",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Offer practical lead magnet formats that align with expert businesses, not generic freebies.",
-    tags: ["lead magnet", "experts", "email", "growth"],
-  },
-  {
-    title: "Repurpose a Podcast Into a Week of Content",
-    niche: "Repurposing",
-    format: "YouTube",
-    difficulty: "High",
-    filmingTime: "45 min",
-    editingEffort: "High",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Turn one long conversation into clips, quotes, carousels, and emails with a structured system.",
-    tags: ["podcast", "repurposing", "systems", "distribution"],
-  },
-  {
-    title: "The Fastest Way to Brief a Video Editor",
-    niche: "Operations",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "12 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Convert",
-    description:
-      "Show the exact asset package and notes that reduce back-and-forth when delegating editing.",
-    tags: ["editor brief", "delegation", "ops", "workflow"],
-  },
-  {
-    title: "What I’d Track Before Hiring Help",
-    niche: "Operations",
-    format: "Newsletter",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Explain the workload, revenue, and process signals that make a first contractor hire less risky.",
-    tags: ["hiring", "operations", "freelancer", "scale"],
-  },
-  {
-    title: "A Better Content Series Than Daily Vlogs",
-    niche: "Content Strategy",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "10 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Pitch a more strategic recurring series model that still feels personal but teaches something specific.",
-    tags: ["series", "vlogs", "strategy", "repeatable"],
-  },
-  {
-    title: "How I Turn DMs Into Product Research",
-    niche: "Audience Research",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Medium",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Show how recurring direct messages can shape content, offers, and messaging with less guessing.",
-    tags: ["dms", "research", "offers", "messaging"],
-  },
-  {
-    title: "The Creator Tech Stack I’d Keep in a Recession",
-    niche: "Creator Gear",
-    format: "Newsletter",
-    difficulty: "Medium",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "Medium",
-    trendFriendly: false,
-    audience: "Nurture",
-    description:
-      "Share a lean stack that protects output quality while trimming unnecessary software spend.",
-    tags: ["tech stack", "budget", "tools", "creator business"],
-  },
-  {
-    title: "How to Teach Without Sounding Generic",
-    niche: "Creator Education",
-    format: "YouTube",
-    difficulty: "High",
-    filmingTime: "50 min",
-    editingEffort: "High",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Attract",
-    description:
-      "Explain how experience, specificity, and opinion combine to make educational content more memorable.",
-    tags: ["teaching", "specificity", "voice", "education"],
-  },
-  {
-    title: "Short-Form Content Scorecard",
-    niche: "Short-Form Strategy",
-    format: "Carousel",
-    difficulty: "Low",
-    filmingTime: "0 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Nurture",
-    description:
-      "Give your audience a checklist they can use to evaluate hooks, clarity, pacing, and replay value.",
-    tags: ["scorecard", "short-form", "checklist", "retention"],
-  },
-  {
-    title: "Three Ways to Warm Up an Offer Before Launch",
-    niche: "Offer Creation",
-    format: "YouTube",
-    difficulty: "Medium",
-    filmingTime: "35 min",
-    editingEffort: "Medium",
-    engagementPotential: "High",
-    trendFriendly: false,
-    audience: "Convert",
-    description:
-      "Walk through pre-launch content that builds demand before the sales page goes live.",
-    tags: ["launch", "offer", "warmup", "sales"],
-  },
-  {
-    title: "My Creator Week in Four Blocks",
-    niche: "Productivity for Creators",
-    format: "Shorts",
-    difficulty: "Low",
-    filmingTime: "15 min",
-    editingEffort: "Low",
-    engagementPotential: "High",
-    trendFriendly: true,
-    audience: "Attract",
-    description:
-      "Show a simple weekly rhythm for planning, filming, editing, and distribution that feels realistic.",
-    tags: ["weekly plan", "time management", "creator workflow", "systems"],
-  },
-];
+const ideas = Array.isArray(window.CONTENT_IDEAS) ? window.CONTENT_IDEAS : [];
 
-const dom = {
-  form: document.getElementById("questionnaire-form"),
-  resultsSection: document.getElementById("results-section"),
-  resultsGrid: document.getElementById("results-grid"),
-  resultsSummary: document.getElementById("results-summary"),
-  resultsFilter: document.getElementById("results-filter"),
-  matchedTotal: document.getElementById("matched-total"),
-  selectedNiche: document.getElementById("selected-niche"),
-  averageEngagement: document.getElementById("average-engagement"),
-  trendFriendlyCount: document.getElementById("trend-friendly-count"),
-  clearButton: document.getElementById("clear-questionnaire"),
-  startOverButton: document.getElementById("start-over-button"),
-  fields: {
-    skillLevel: document.getElementById("skillLevel"),
-    filmingTime: document.getElementById("filmingTime"),
-    editingEffort: document.getElementById("editingEffort"),
-  },
-};
+const PAGE_SIZE = 8;
 
-const NICHE_LABELS = {
-  "creator-education": "Creator Education",
-  "youtube-growth": "YouTube Growth",
-  "short-form-strategy": "Short-Form Strategy",
-  "video-editing": "Video Editing",
-  "email-marketing": "Email Marketing",
-  monetization: "Monetization",
-};
+const FORMAT_ORDER = ["Shorts", "Carousel", "YouTube", "Newsletter", "Live"];
 
-const MATCH_SCORE_VALUES = {
-  niche: 4,
-  skillLevel: 3,
-  filmingTime: 2,
-  editingEffort: 2,
-  goal: 3,
-  trendFriendly: 1,
-};
-
-const ENGAGEMENT_SCORES = {
+const ENGAGEMENT_SCORE = {
   Low: 1,
   Medium: 2,
   High: 3,
 };
 
-const GOAL_LABELS = {
-  "grow-audience": "Grow Audience",
-  "increase-engagement": "Increase Engagement",
-  "improve-consistency": "Improve Consistency",
-  "sell-offer": "Sell an Offer",
-  "build-authority": "Build Authority",
+const EFFORT_SCORE = {
+  Low: 1,
+  Medium: 2,
+  High: 3,
 };
 
-const SKILL_LEVEL_BY_DIFFICULTY = {
-  Low: "beginner",
-  Medium: "intermediate",
-  High: "advanced",
+const NICHE_VISUALS = {
+  "Creator Education": ["creator", "studio", "camera"],
+  "YouTube Growth": ["analytics", "screen", "studio"],
+  "Short-Form Strategy": ["phone", "creator", "reels"],
+  "Video Editing": ["editing", "monitor", "cinematic"],
+  Monetization: ["money", "business", "laptop"],
+  "Email Marketing": ["email", "laptop", "desk"],
+  "Brand Deals": ["meeting", "brand", "team"],
+  Repurposing: ["planning", "notebook", "laptop"],
+  "Creator Systems": ["workspace", "planner", "desk"],
+  "Community Building": ["community", "team", "group"],
+  "Audience Research": ["analytics", "data", "research"],
+  "Personal Branding": ["portrait", "fashion", "office"],
 };
 
-const SKILL_LEVEL_LABELS = {
-  beginner: "Beginner",
-  intermediate: "Intermediate",
-  advanced: "Advanced",
+const TAG_VISUALS = {
+  analytics: "graphs",
+  audit: "screen",
+  banner: "branding",
+  "before after": "cinematic",
+  branding: "portrait",
+  business: "meeting",
+  camera: "camera",
+  captions: "editing",
+  challenge: "action",
+  comments: "community",
+  consistency: "planner",
+  conversion: "business",
+  copywriting: "laptop",
+  creator: "studio",
+  editing: "editing",
+  education: "teacher",
+  email: "email",
+  engagement: "group",
+  faq: "creator",
+  future: "futuristic",
+  hooks: "microphone",
+  live: "streaming",
+  monetization: "money",
+  newsletter: "laptop",
+  packaging: "creative",
+  planning: "planner",
+  portrait: "portrait",
+  productivity: "workspace",
+  reels: "phone",
+  research: "research",
+  storytelling: "camera",
+  strategy: "planning",
+  studio: "studio",
+  thumbnail: "screen",
+  tutorial: "workspace",
+  workflow: "desk",
+  youtube: "camera",
 };
 
-const EMPTY_RESULTS_MESSAGE =
-  "No matching ideas were found for that niche yet. Try a different niche or reset the questionnaire and answer again.";
-
-const MISSING_NICHE_MESSAGE =
-  "Choose a niche first so the app can narrow the idea list.";
-
-const FILTER_EMPTY_MESSAGE =
-  "No suggested ideas match the filter you selected. Try a different filter option.";
-
-const resultsViewState = {
-  answers: null,
-  displayedResults: [],
+const GOAL_HOOKS = {
+  "Grow Audience": [
+    "I'd post this to restart from zero",
+    "This could pull your next 1K viewers",
+    "Steal this growth angle",
+  ],
+  "Increase Engagement": [
+    "This one gets comments fast",
+    "High-save concept",
+    "Replay-trigger idea",
+  ],
+  "Build Authority": [
+    "Teach this and people remember you",
+    "Expert mode without sounding stiff",
+    "Trust-building angle",
+  ],
+  "Improve Consistency": [
+    "Easy enough to ship this week",
+    "Repeatable without going stale",
+    "Low-friction format",
+  ],
+  "Sell Offer": [
+    "A clean trust-to-sale angle",
+    "Warm up buyers without pitching",
+    "Conversion-ready angle",
+  ],
 };
 
-function readFormAnswers() {
-  const selectedTrendPreference = dom.form.querySelector(
-    'input[name="trendFriendly"]:checked',
-  );
-  const selectedNiches = Array.from(
-    dom.form.querySelectorAll('input[name="niches"]:checked'),
-    (input) => input.value,
-  );
-  const selectedGoals = Array.from(
-    dom.form.querySelectorAll('input[name="goals"]:checked'),
-    (input) => input.value,
-  );
+const state = {
+  view: "explore",
+  search: "",
+  sort: "featured",
+  niche: "all",
+  format: "all",
+  trend: "all",
+  visibleCount: PAGE_SIZE,
+  savedIds: loadSavedIds(),
+};
 
-  return {
-    niches: selectedNiches,
-    skillLevel: dom.fields.skillLevel.value,
-    filmingTime: dom.fields.filmingTime.value,
-    editingEffort: dom.fields.editingEffort.value,
-    goals: selectedGoals,
-    trendFriendly: selectedTrendPreference
-      ? selectedTrendPreference.value === "yes"
-      : false,
-  };
+const dom = {
+  body: document.body,
+  loadingScreen: document.getElementById("loading-screen"),
+  loadingLine: document.getElementById("loading-line"),
+  loadingSubline: document.getElementById("loading-subline"),
+  totalIdeasCount: document.getElementById("total-ideas-count"),
+  totalNichesCount: document.getElementById("total-niches-count"),
+  visibleIdeasCount: document.getElementById("visible-ideas-count"),
+  exploreCount: document.getElementById("explore-count"),
+  savedCount: document.getElementById("saved-count"),
+  viewButtons: [...document.querySelectorAll("[data-view-button]")],
+  nicheNav: document.getElementById("niche-nav"),
+  clearNicheButton: document.getElementById("clear-niche-button"),
+  searchInput: document.getElementById("search-input"),
+  sortSelect: document.getElementById("sort-select"),
+  formatSelect: document.getElementById("format-select"),
+  trendSelect: document.getElementById("trend-select"),
+  clearFiltersButton: document.getElementById("clear-filters-button"),
+  activeFilters: document.getElementById("active-filters"),
+  resultsCount: document.getElementById("results-count"),
+  spotlightGrid: document.getElementById("spotlight-grid"),
+  catalogGrid: document.getElementById("catalog-grid"),
+  loadMoreButton: document.getElementById("load-more-button"),
+  exploreView: document.getElementById("explore-view"),
+  savedView: document.getElementById("saved-view"),
+  savedGrid: document.getElementById("saved-grid"),
+  savedEmpty: document.getElementById("saved-empty"),
+  clearShortlistButton: document.getElementById("clear-shortlist-button"),
+};
+
+const niches = [...new Set(ideas.map((idea) => idea.niche))].sort((left, right) =>
+  left.localeCompare(right),
+);
+
+const formats = FORMAT_ORDER.filter((format) => ideas.some((idea) => idea.format === format));
+
+function loadSavedIds() {
+  try {
+    const storedValue = localStorage.getItem("idea-atlas-saved");
+    const parsedValue = JSON.parse(storedValue || "[]");
+    return Array.isArray(parsedValue) ? parsedValue : [];
+  } catch (error) {
+    return [];
+  }
 }
 
-function getIdeaSkillLevelId(idea) {
-  return SKILL_LEVEL_BY_DIFFICULTY[idea.difficulty] || "";
+function saveSavedIds() {
+  try {
+    localStorage.setItem("idea-atlas-saved", JSON.stringify(state.savedIds));
+  } catch (error) {
+    return;
+  }
 }
 
-function getSkillLevelLabel(idea) {
-  return SKILL_LEVEL_LABELS[getIdeaSkillLevelId(idea)] || idea.difficulty;
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
-function getIdeaFilmingTimeId(idea) {
-  const minutes = Number.parseInt(idea.filmingTime, 10);
-
-  if (minutes <= 15) {
-    return "low";
-  }
-
-  if (minutes <= 45) {
-    return "medium";
-  }
-
-  return "high";
-}
-
-function getIdeaGoalIds(idea) {
-  const goalIds = [];
-
-  if (idea.audience === "Attract") {
-    goalIds.push("grow-audience", "build-authority");
-  }
-
-  if (idea.audience === "Nurture") {
-    goalIds.push("increase-engagement", "improve-consistency", "build-authority");
-  }
-
-  if (idea.audience === "Convert") {
-    goalIds.push("sell-offer", "build-authority");
-  }
-
-  if (idea.tags.includes("consistency") || idea.tags.includes("planning")) {
-    goalIds.push("improve-consistency");
-  }
-
-  if (idea.engagementPotential === "High") {
-    goalIds.push("increase-engagement");
-  }
-
-  return goalIds;
-}
-
-function getNicheLabel(nicheId) {
-  return NICHE_LABELS[nicheId] || "";
-}
-
-function getNicheLabels(nicheIds) {
-  return nicheIds.map((nicheId) => getNicheLabel(nicheId)).filter(Boolean);
-}
-
-function filterIdeasForSelectedNiches(nicheIds) {
-  const selectedNicheLabels = getNicheLabels(nicheIds);
-
-  return ideas.filter((idea) => selectedNicheLabels.includes(idea.niche));
-}
-
-function calculateMatchScore(idea, answers) {
-  let score = 0;
-  const selectedNicheLabels = getNicheLabels(answers.niches);
-
-  // Every idea that survives the first niche filter gets the niche points.
-  if (selectedNicheLabels.includes(idea.niche)) {
-    score += MATCH_SCORE_VALUES.niche;
-  }
-
-  if (getIdeaSkillLevelId(idea) === answers.skillLevel) {
-    score += MATCH_SCORE_VALUES.skillLevel;
-  }
-
-  if (getIdeaFilmingTimeId(idea) === answers.filmingTime) {
-    score += MATCH_SCORE_VALUES.filmingTime;
-  }
-
-  if (idea.editingEffort.toLowerCase() === answers.editingEffort) {
-    score += MATCH_SCORE_VALUES.editingEffort;
-  }
-
-  if (answers.goals.some((goalId) => getIdeaGoalIds(idea).includes(goalId))) {
-    score += MATCH_SCORE_VALUES.goal;
-  }
-
-  if (answers.trendFriendly && idea.trendFriendly) {
-    score += MATCH_SCORE_VALUES.trendFriendly;
-  }
-
-  return score;
-}
-
-function buildRankedResults(answers) {
-  const nicheMatchedIdeas = filterIdeasForSelectedNiches(answers.niches);
-  const displayedIdeas = nicheMatchedIdeas
-    .map((idea) => ({
-      ...idea,
-      matchScore: calculateMatchScore(idea, answers),
-    }))
-    .sort((left, right) => {
-      if (right.matchScore !== left.matchScore) {
-        return right.matchScore - left.matchScore;
-      }
-
-      return left.title.localeCompare(right.title);
-    })
-    .slice(0, 6);
-
-  return {
-    totalMatchedIdeas: nicheMatchedIdeas.length,
-    displayedResults: displayedIdeas,
-  };
-}
-
-function getGoalLabel(goalId) {
-  return GOAL_LABELS[goalId] || "";
-}
-
-function getResultsFilterOptions(answers) {
-  const nicheOptions = answers.niches.map((nicheId) => ({
-    value: `niche:${nicheId}`,
-    label: `Niche: ${getNicheLabel(nicheId)}`,
-  }));
-  const goalOptions = answers.goals.map((goalId) => ({
-    value: `goal:${goalId}`,
-    label: `Goal: ${getGoalLabel(goalId)}`,
-  }));
-
-  return [
-    { value: "all", label: "All suggested ideas" },
-    { groupLabel: "Niche", options: nicheOptions },
-    { groupLabel: "Goal", options: goalOptions },
-  ];
-}
-
-function populateResultsFilter(answers) {
-  const filterOptions = getResultsFilterOptions(answers);
-
-  dom.resultsFilter.innerHTML = "";
-
-  filterOptions.forEach((item) => {
-    if (item.value) {
-      const option = document.createElement("option");
-      option.value = item.value;
-      option.textContent = item.label;
-      dom.resultsFilter.appendChild(option);
-      return;
-    }
-
-    if (item.options.length === 0) {
-      return;
-    }
-
-    const optionGroup = document.createElement("optgroup");
-    optionGroup.label = item.groupLabel;
-
-    item.options.forEach((optionConfig) => {
-      const option = document.createElement("option");
-      option.value = optionConfig.value;
-      option.textContent = optionConfig.label.replace(`${item.groupLabel}: `, "");
-      optionGroup.appendChild(option);
-    });
-
-    dom.resultsFilter.appendChild(optionGroup);
+function wait(duration) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, duration);
   });
-
-  dom.resultsFilter.value = "all";
 }
 
-function filterDisplayedResultsBySelection(results, filterValue) {
-  if (filterValue === "all") {
-    return results;
-  }
+function typeText(element, text, speed) {
+  return new Promise((resolve) => {
+    element.textContent = "";
+    let index = 0;
+    const timer = window.setInterval(() => {
+      element.textContent = text.slice(0, index + 1);
+      index += 1;
 
-  const [filterType, filterId] = filterValue.split(":");
-
-  if (filterType === "niche") {
-    return results.filter((idea) => idea.niche === getNicheLabel(filterId));
-  }
-
-  if (filterType === "goal") {
-    return results.filter((idea) => getIdeaGoalIds(idea).includes(filterId));
-  }
-
-  return results;
+      if (index >= text.length) {
+        window.clearInterval(timer);
+        resolve();
+      }
+    }, speed);
+  });
 }
 
-function getMatchedGoalLabel(idea, selectedGoalIds) {
-  const matchingGoalId = selectedGoalIds.find((goalId) =>
-    getIdeaGoalIds(idea).includes(goalId),
-  );
+function deleteText(element, speed) {
+  return new Promise((resolve) => {
+    const currentText = element.textContent;
+    let index = currentText.length;
+    const timer = window.setInterval(() => {
+      element.textContent = currentText.slice(0, Math.max(0, index - 1));
+      index -= 1;
 
-  if (matchingGoalId) {
-    return getGoalLabel(matchingGoalId);
-  }
-
-  return getGoalLabel(selectedGoalIds[0]) || "Not specified";
+      if (index <= 0) {
+        window.clearInterval(timer);
+        resolve();
+      }
+    }, speed);
+  });
 }
 
-function createResultCard(idea, answers) {
-  const card = document.createElement("article");
-  card.className = "idea-card";
+async function startLoaderSequence() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const trendBadgeMarkup = idea.trendFriendly
-    ? '<span class="status-badge status-badge-trend">Trend-Friendly</span>'
-    : '<span class="status-badge status-badge-evergreen">Evergreen</span>';
-  const matchedGoalLabel = getMatchedGoalLabel(idea, answers.goals);
+  if (prefersReducedMotion) {
+    dom.loadingLine.textContent = "Welcome to Idea Atlas.";
+    dom.loadingSubline.textContent = "Browse sharp content ideas.";
+    await wait(650);
+  } else {
+    await typeText(dom.loadingLine, "Welcome to Idea Atlas.", 30);
+    await wait(160);
+    await deleteText(dom.loadingLine, 16);
+    await Promise.all([
+      typeText(dom.loadingLine, "Browse sharp content ideas.", 22),
+      typeText(dom.loadingSubline, "Search, filter, save, and keep the strongest ones.", 11),
+    ]);
+    await wait(320);
+  }
 
-  card.innerHTML = `
-    <div class="card-head">
-      <div class="card-top">
-        <span class="tag">${idea.niche}</span>
-        ${trendBadgeMarkup}
-      </div>
-      <div class="pill-group">
-        <span class="pill">Score ${idea.matchScore}</span>
-        <span class="pill">${idea.engagementPotential} engagement</span>
-      </div>
-    </div>
+  dom.body.classList.remove("is-loading");
+  dom.body.classList.add("is-loaded");
 
-    <div>
-      <h3 class="idea-title">${idea.title}</h3>
-      <p class="idea-description">${idea.description}</p>
-    </div>
-    <dl class="idea-meta">
-      <div class="meta-item">
-        <dt>Format</dt>
-        <dd>${idea.format}</dd>
-      </div>
-      <div class="meta-item">
-        <dt>Skill Level</dt>
-        <dd>${getSkillLevelLabel(idea)}</dd>
-      </div>
-      <div class="meta-item">
-        <dt>Filming Time</dt>
-        <dd>${idea.filmingTime}</dd>
-      </div>
-      <div class="meta-item">
-        <dt>Editing</dt>
-        <dd>${idea.editingEffort}</dd>
-      </div>
-      <div class="meta-item">
-        <dt>Goal</dt>
-        <dd>${matchedGoalLabel}</dd>
-      </div>
-      <div class="meta-item">
-        <dt>Match Score</dt>
-        <dd>${idea.matchScore}</dd>
-      </div>
-    </dl>
-    <p class="card-footer">${idea.tags.slice(0, 3).join(" • ")}</p>
+  window.setTimeout(() => {
+    dom.loadingScreen.remove();
+  }, 700);
+}
+
+function formatMinutes(minutes) {
+  return minutes === 0 ? "0 min" : `${minutes} min`;
+}
+
+function getTrendLabel(idea) {
+  return idea.trendFriendly ? "Trend ready" : "Evergreen";
+}
+
+function getFormatOptionsMarkup() {
+  return formats
+    .map((format) => `<option value="${escapeHtml(format)}">${escapeHtml(format)}</option>`)
+    .join("");
+}
+
+function getSearchBlob(idea) {
+  return [
+    idea.title,
+    idea.description,
+    idea.niche,
+    idea.audience,
+    idea.format,
+    idea.difficulty,
+    idea.editingEffort,
+    idea.engagementPotential,
+    idea.goals.join(" "),
+    idea.tags.join(" "),
+  ]
+    .join(" ")
+    .toLowerCase();
+}
+
+function hashString(value) {
+  return [...value].reduce((total, character) => total * 31 + character.charCodeAt(0), 7);
+}
+
+function getVisualKeywords(idea) {
+  const nicheWords = NICHE_VISUALS[idea.niche] || ["creative", "studio", "workspace"];
+  const mappedTags = idea.tags.map((tag) => TAG_VISUALS[tag]).filter(Boolean);
+  const formatWord = TAG_VISUALS[idea.format.toLowerCase()] || idea.format.toLowerCase();
+
+  return [...new Set([nicheWords[0], mappedTags[0] || nicheWords[1], formatWord || nicheWords[2]])]
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((word) => word.replace(/[^a-z0-9]+/gi, "").toLowerCase())
+    .filter(Boolean);
+}
+
+function getImageForIdea(idea) {
+  const promptParts = [
+    "high-contrast cinematic editorial square photo",
+    `"${idea.title}"`,
+    idea.description,
+    `for ${idea.niche}`,
+    `format ${idea.format}`,
+    `keywords ${getVisualKeywords(idea).join(", ") || "creative, studio, workspace"}`,
+    "single clear subject",
+    "distinct composition",
+    "dramatic lighting",
+    "realistic",
+    "bold focal point",
+    "no text",
+    "no watermark",
+    "no logo",
+  ];
+  const prompt = encodeURIComponent(promptParts.join(", "));
+
+  return {
+    src: `https://gen.pollinations.ai/image/${prompt}`,
+    alt: `Photo matching ${idea.title}`,
+  };
+}
+
+function getFallbackCardImage(idea) {
+  const hash = Math.abs(hashString(idea.id));
+  const hueA = hash % 360;
+  const hueB = (hash + 92) % 360;
+  const hueC = (hash + 184) % 360;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="hsl(${hueA} 78% 52%)" />
+          <stop offset="50%" stop-color="hsl(${hueB} 74% 46%)" />
+          <stop offset="100%" stop-color="hsl(${hueC} 68% 18%)" />
+        </linearGradient>
+        <radialGradient id="glow" cx="50%" cy="40%" r="55%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.42)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </radialGradient>
+        <linearGradient id="panel" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="rgba(4,8,18,0.92)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0.06)" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="1200" fill="url(#bg)" />
+      <circle cx="930" cy="240" r="220" fill="url(#glow)" />
+      <circle cx="190" cy="920" r="290" fill="rgba(255,255,255,0.08)" />
+      <circle cx="720" cy="720" r="180" fill="rgba(255,255,255,0.08)" />
+      <rect x="90" y="88" width="1020" height="1020" rx="64" fill="rgba(8,12,24,0.12)" stroke="rgba(255,255,255,0.18)" />
+      <rect x="132" y="126" width="936" height="936" rx="52" fill="rgba(255,255,255,0.04)" />
+      <path d="M146 714C282 620 396 584 540 594C712 606 800 754 1054 690V1062H146Z" fill="url(#panel)" />
+      <path d="M152 582C256 462 402 404 530 432C712 472 746 624 1048 544" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="18" stroke-linecap="round" />
+      <path d="M162 500C298 350 476 294 652 330C838 368 914 500 1052 454" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="12" stroke-linecap="round" />
+    </svg>
   `;
 
-  return card;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-function renderEmptyState(message) {
-  dom.resultsGrid.innerHTML = `<div class="empty-state">${message}</div>`;
+function getCardHook(idea) {
+  const primaryGoal = idea.goals[0] || "Grow Audience";
+  const hooks = GOAL_HOOKS[primaryGoal] || ["Standout concept"];
+  return idea.featured ? "Top pick" : hooks[Math.abs(hashString(idea.id)) % hooks.length];
 }
 
-function renderResults(results, answers, emptyMessage = EMPTY_RESULTS_MESSAGE) {
-  dom.resultsGrid.innerHTML = "";
+function getCardSupportLine(idea) {
+  const shortDescription = (idea.description.split(".")[0] || idea.description).trim();
+  return shortDescription.length > 92 ? `${shortDescription.slice(0, 89).trim()}...` : shortDescription;
+}
 
-  if (results.length === 0) {
-    renderEmptyState(emptyMessage);
-    return;
+function getCardPalette(idea) {
+  const base = Math.abs(hashString(idea.id));
+  return {
+    accentHue: base % 360,
+    secondaryHue: (base * 7 + 96) % 360,
+  };
+}
+
+function matchesFilters(idea) {
+  const query = state.search.trim().toLowerCase();
+
+  if (query && !getSearchBlob(idea).includes(query)) {
+    return false;
   }
 
-  results.forEach((idea) => {
-    dom.resultsGrid.appendChild(createResultCard(idea, answers));
+  if (state.niche !== "all" && idea.niche !== state.niche) {
+    return false;
+  }
+
+  if (state.format !== "all" && idea.format !== state.format) {
+    return false;
+  }
+
+  if (state.trend === "trend" && !idea.trendFriendly) {
+    return false;
+  }
+
+  if (state.trend === "evergreen" && idea.trendFriendly) {
+    return false;
+  }
+
+  return true;
+}
+
+function sortIdeas(results) {
+  const sortedResults = [...results];
+
+  sortedResults.sort((left, right) => {
+    if (state.sort === "unique" && right.uniquenessScore !== left.uniquenessScore) {
+      return right.uniquenessScore - left.uniquenessScore;
+    }
+
+    if (
+      state.sort === "engagement" &&
+      ENGAGEMENT_SCORE[right.engagementPotential] !== ENGAGEMENT_SCORE[left.engagementPotential]
+    ) {
+      return ENGAGEMENT_SCORE[right.engagementPotential] - ENGAGEMENT_SCORE[left.engagementPotential];
+    }
+
+    if (state.sort === "fastest" && left.filmingMinutes !== right.filmingMinutes) {
+      return left.filmingMinutes - right.filmingMinutes;
+    }
+
+    if (state.sort === "easiest") {
+      const leftEffortScore = EFFORT_SCORE[left.editingEffort] + EFFORT_SCORE[left.difficulty];
+      const rightEffortScore = EFFORT_SCORE[right.editingEffort] + EFFORT_SCORE[right.difficulty];
+
+      if (leftEffortScore !== rightEffortScore) {
+        return leftEffortScore - rightEffortScore;
+      }
+    }
+
+    if (state.sort === "alphabetical") {
+      return left.title.localeCompare(right.title);
+    }
+
+    if (left.featured !== right.featured) {
+      return Number(right.featured) - Number(left.featured);
+    }
+
+    if (right.uniquenessScore !== left.uniquenessScore) {
+      return right.uniquenessScore - left.uniquenessScore;
+    }
+
+    if (ENGAGEMENT_SCORE[right.engagementPotential] !== ENGAGEMENT_SCORE[left.engagementPotential]) {
+      return ENGAGEMENT_SCORE[right.engagementPotential] - ENGAGEMENT_SCORE[left.engagementPotential];
+    }
+
+    return left.title.localeCompare(right.title);
+  });
+
+  return sortedResults;
+}
+
+function getFilteredIdeas(sourceIdeas = ideas) {
+  return sortIdeas(sourceIdeas.filter((idea) => matchesFilters(idea)));
+}
+
+function getSavedIdeas() {
+  const savedLookup = new Set(state.savedIds);
+  return ideas.filter((idea) => savedLookup.has(idea.id));
+}
+
+function getSpotlightIdeas(results) {
+  const featuredResults = results.filter((idea) => idea.featured).slice(0, 4);
+  return featuredResults.length > 0 ? featuredResults : results.slice(0, 4);
+}
+
+function getVisibleCatalogIdeas(results, spotlightIdeas) {
+  const spotlightIds = new Set(spotlightIdeas.map((idea) => idea.id));
+  return results.filter((idea) => !spotlightIds.has(idea.id)).slice(0, state.visibleCount);
+}
+
+function toggleSavedId(ideaId) {
+  if (state.savedIds.includes(ideaId)) {
+    state.savedIds = state.savedIds.filter((savedId) => savedId !== ideaId);
+  } else {
+    state.savedIds = [ideaId, ...state.savedIds];
+  }
+
+  saveSavedIds();
+  render();
+}
+
+function renderFormatOptions() {
+  dom.formatSelect.insertAdjacentHTML("beforeend", getFormatOptionsMarkup());
+}
+
+function renderNicheNav() {
+  const nicheButtons = [
+    {
+      label: "All ideas",
+      value: "all",
+      count: ideas.length,
+    },
+    ...niches.map((niche) => ({
+      label: niche,
+      value: niche,
+      count: ideas.filter((idea) => idea.niche === niche).length,
+    })),
+  ];
+
+  dom.nicheNav.innerHTML = nicheButtons
+    .map(
+      (item) => `
+        <button
+          class="niche-button${state.niche === item.value ? " is-active" : ""}"
+          type="button"
+          data-niche-value="${escapeHtml(item.value)}"
+        >
+          <span>${escapeHtml(item.label)}</span>
+          <span>${item.count}</span>
+        </button>
+      `,
+    )
+    .join("");
+}
+
+function renderActiveFilters() {
+  const chips = [];
+
+  if (state.search.trim()) {
+    chips.push(`Search: ${escapeHtml(state.search.trim())}`);
+  }
+
+  if (state.niche !== "all") {
+    chips.push(`Niche: ${escapeHtml(state.niche)}`);
+  }
+
+  if (state.format !== "all") {
+    chips.push(`Format: ${escapeHtml(state.format)}`);
+  }
+
+  if (state.trend !== "all") {
+    chips.push(state.trend === "trend" ? "Style: Trend ready" : "Style: Evergreen");
+  }
+
+  dom.activeFilters.innerHTML = chips.map((chip) => `<span class="active-chip">${chip}</span>`).join("");
+}
+
+function createCardMarkup(idea) {
+  const image = getImageForIdea(idea);
+  const isSaved = state.savedIds.includes(idea.id);
+  const palette = getCardPalette(idea);
+
+  return `
+    <article
+      class="idea-card"
+      tabindex="0"
+      style="--card-accent-h:${palette.accentHue}; --card-accent-secondary-h:${palette.secondaryHue};"
+    >
+      <div class="card-media">
+        <img
+          src="${escapeHtml(image.src)}"
+          alt="${escapeHtml(image.alt)}"
+          loading="lazy"
+          data-idea-id="${escapeHtml(idea.id)}"
+        />
+      </div>
+
+      <div class="card-topbar">
+        <div class="card-badges">
+          <span class="card-badge">${escapeHtml(idea.niche)}</span>
+        </div>
+        <button
+          class="save-button${isSaved ? " is-saved" : ""}"
+          type="button"
+          aria-label="${isSaved ? "Remove from saved ideas" : "Save idea"}"
+          aria-pressed="${isSaved}"
+          data-save-id="${escapeHtml(idea.id)}"
+        >
+          ${isSaved ? "★" : "☆"}
+        </button>
+      </div>
+
+      <div class="card-body">
+        <div class="card-copy">
+          <h3>${escapeHtml(idea.title)}</h3>
+          <p>${escapeHtml(getCardSupportLine(idea))}</p>
+        </div>
+        <div class="card-meta">
+          <span class="card-meta-pill">${escapeHtml(idea.format)}</span>
+          <span class="card-meta-pill">${escapeHtml(getTrendLabel(idea))}</span>
+          <span class="card-meta-pill">${escapeHtml(formatMinutes(idea.filmingMinutes))}</span>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderExploreView() {
+  const results = getFilteredIdeas();
+  const spotlightIdeas = getSpotlightIdeas(results);
+  const catalogIdeas = getVisibleCatalogIdeas(results, spotlightIdeas);
+  const currentVisibleCount = spotlightIdeas.length + catalogIdeas.length;
+
+  dom.resultsCount.textContent = `${results.length} result${results.length === 1 ? "" : "s"}`;
+  dom.visibleIdeasCount.textContent = String(currentVisibleCount);
+
+  if (spotlightIdeas.length === 0) {
+    dom.spotlightGrid.innerHTML = '<div class="empty-state">No featured cards match this filter set.</div>';
+  } else {
+    dom.spotlightGrid.innerHTML = spotlightIdeas.map((idea) => createCardMarkup(idea)).join("");
+  }
+
+  if (catalogIdeas.length === 0) {
+    dom.catalogGrid.innerHTML = '<div class="empty-state">No ideas match the current search and filters.</div>';
+  } else {
+    dom.catalogGrid.innerHTML = catalogIdeas.map((idea) => createCardMarkup(idea)).join("");
+  }
+
+  const hiddenCount =
+    results.filter((idea) => !spotlightIdeas.some((spotlightIdea) => spotlightIdea.id === idea.id)).length -
+    catalogIdeas.length;
+
+  dom.loadMoreButton.hidden = hiddenCount <= 0;
+  dom.loadMoreButton.textContent = hiddenCount > PAGE_SIZE ? `Load ${PAGE_SIZE} more` : "Load more";
+}
+
+function renderSavedView() {
+  const savedIdeas = getFilteredIdeas(getSavedIdeas());
+  const hasSavedIdeas = state.savedIds.length > 0;
+
+  dom.savedGrid.innerHTML = savedIdeas.map((idea) => createCardMarkup(idea)).join("");
+  dom.savedEmpty.classList.toggle("is-hidden", savedIdeas.length > 0);
+
+  if (state.view === "saved") {
+    dom.visibleIdeasCount.textContent = String(savedIdeas.length);
+  }
+
+  if (savedIdeas.length === 0) {
+    dom.savedGrid.innerHTML = "";
+    dom.savedEmpty.textContent = hasSavedIdeas
+      ? "No saved ideas match the current search and filters."
+      : "Save cards from Explore to keep your best ideas here.";
+  }
+}
+
+function renderViewState() {
+  const showExplore = state.view === "explore";
+
+  dom.exploreView.classList.toggle("is-hidden", !showExplore);
+  dom.savedView.classList.toggle("is-hidden", showExplore);
+
+  dom.viewButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.viewButton === state.view);
   });
 }
 
-function updateResultsSummary(results) {
-  if (results.length === 0) {
-    dom.resultsSummary.textContent = "No results found for those answers.";
-    return;
-  }
-
-  dom.resultsSummary.textContent = `Showing the top ${results.length} ideas ranked for your current answers.`;
+function renderCounts() {
+  dom.totalIdeasCount.textContent = String(ideas.length);
+  dom.totalNichesCount.textContent = String(niches.length);
+  dom.exploreCount.textContent = String(ideas.length);
+  dom.savedCount.textContent = String(state.savedIds.length);
 }
 
-function getAverageEngagement(results) {
-  if (results.length === 0) {
-    return "-";
-  }
+function resetFilters() {
+  state.search = "";
+  state.niche = "all";
+  state.format = "all";
+  state.trend = "all";
+  state.sort = "featured";
+  state.visibleCount = PAGE_SIZE;
 
-  const totalScore = results.reduce(
-    (sum, idea) => sum + (ENGAGEMENT_SCORES[idea.engagementPotential] || 0),
-    0,
-  );
-  const averageScore = totalScore / results.length;
-
-  return `${averageScore.toFixed(1)}/3`;
+  dom.searchInput.value = "";
+  dom.sortSelect.value = "featured";
+  dom.formatSelect.value = "all";
+  dom.trendSelect.value = "all";
 }
 
-function getTrendFriendlyCount(results) {
-  return results.filter((idea) => idea.trendFriendly).length;
-}
+function attachCardMotion() {
+  const cards = [...document.querySelectorAll(".idea-card")];
 
-function updateStats(results, answers, totalMatchedIdeas) {
-  dom.matchedTotal.textContent = totalMatchedIdeas;
-  dom.selectedNiche.textContent = getNicheLabels(answers.niches).join(", ") || "-";
-  dom.averageEngagement.textContent = getAverageEngagement(results);
-  dom.trendFriendlyCount.textContent = getTrendFriendlyCount(results);
-}
+  cards.forEach((card) => {
+    const resetTilt = () => {
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+      card.style.setProperty("--pointer-x", "50%");
+      card.style.setProperty("--pointer-y", "50%");
+    };
 
-function resetSummaryStats() {
-  dom.matchedTotal.textContent = "0";
-  dom.selectedNiche.textContent = "-";
-  dom.averageEngagement.textContent = "-";
-  dom.trendFriendlyCount.textContent = "0";
-}
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const horizontal = (event.clientX - rect.left) / rect.width;
+      const vertical = (event.clientY - rect.top) / rect.height;
+      const rotateY = (horizontal - 0.5) * 10;
+      const rotateX = (0.5 - vertical) * 10;
 
-function showResults() {
-  dom.resultsSection.hidden = false;
-}
+      card.style.setProperty("--tilt-x", `${rotateX}deg`);
+      card.style.setProperty("--tilt-y", `${rotateY}deg`);
+      card.style.setProperty("--pointer-x", `${horizontal * 100}%`);
+      card.style.setProperty("--pointer-y", `${vertical * 100}%`);
+    });
 
-function hideResults() {
-  dom.resultsSection.hidden = true;
-  dom.resultsGrid.innerHTML = "";
-  dom.resultsSummary.textContent = "No results generated yet.";
-  resetSummaryStats();
-  dom.resultsFilter.innerHTML = '<option value="all">All suggested ideas</option>';
-  resultsViewState.answers = null;
-  resultsViewState.displayedResults = [];
-}
-
-function showMissingNicheState(answers) {
-  showResults();
-  updateResultsSummary([]);
-  updateStats([], answers, 0);
-  renderEmptyState(MISSING_NICHE_MESSAGE);
-}
-
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  const answers = readFormAnswers();
-
-  if (answers.niches.length === 0) {
-    showMissingNicheState(answers);
-    return;
-  }
-
-  // The app filters by niche first, then scores the remaining ideas.
-  const { totalMatchedIdeas, displayedResults } = buildRankedResults(answers);
-  resultsViewState.answers = answers;
-  resultsViewState.displayedResults = displayedResults;
-  populateResultsFilter(answers);
-
-  showResults();
-  updateResultsSummary(displayedResults);
-  updateStats(displayedResults, answers, totalMatchedIdeas);
-  renderResults(displayedResults, answers);
-}
-
-function handleResultsFilterChange() {
-  if (!resultsViewState.answers) {
-    return;
-  }
-
-  const filteredResults = filterDisplayedResultsBySelection(
-    resultsViewState.displayedResults,
-    dom.resultsFilter.value,
-  );
-
-  renderResults(filteredResults, resultsViewState.answers, FILTER_EMPTY_MESSAGE);
-}
-
-function clearResultsOnly() {
-  hideResults();
-}
-
-function resetFormAndResults() {
-  dom.form.reset();
-  hideResults();
-}
-
-function bindEventListeners() {
-  dom.form.addEventListener("submit", handleFormSubmit);
-  dom.form.addEventListener("reset", () => {
-    window.setTimeout(hideResults, 0);
+    card.addEventListener("pointerleave", resetTilt);
+    card.addEventListener("pointercancel", resetTilt);
+    card.addEventListener("blur", resetTilt, true);
   });
-  dom.resultsFilter.addEventListener("change", handleResultsFilterChange);
-  dom.startOverButton.addEventListener("click", resetFormAndResults);
-  dom.clearButton.addEventListener("click", clearResultsOnly);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  hideResults();
-  bindEventListeners();
-});
+function attachImageFallbacks() {
+  const images = [...document.querySelectorAll(".card-media img")];
+
+  images.forEach((image) => {
+    if (image.dataset.fallbackBound === "true") {
+      return;
+    }
+
+    image.dataset.fallbackBound = "true";
+
+    image.addEventListener(
+      "error",
+      () => {
+        const ideaId = image.dataset.ideaId || "";
+        const idea = ideas.find((entry) => entry.id === ideaId);
+
+        if (!idea || image.dataset.fallbackApplied === "true") {
+          return;
+        }
+
+        image.dataset.fallbackApplied = "true";
+        image.src = getFallbackCardImage(idea);
+      },
+      { once: true },
+    );
+  });
+}
+
+function render() {
+  renderCounts();
+  renderNicheNav();
+  renderActiveFilters();
+  renderViewState();
+  renderExploreView();
+  renderSavedView();
+  attachCardMotion();
+  attachImageFallbacks();
+}
+
+function handleViewChange(nextView) {
+  state.view = nextView;
+  render();
+}
+
+function handleFilterChange() {
+  state.visibleCount = PAGE_SIZE;
+  render();
+}
+
+function bindEvents() {
+  dom.viewButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      handleViewChange(button.dataset.viewButton || "explore");
+    });
+  });
+
+  dom.clearNicheButton.addEventListener("click", () => {
+    state.niche = "all";
+    handleFilterChange();
+  });
+
+  dom.nicheNav.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-niche-value]");
+
+    if (!button) {
+      return;
+    }
+
+    state.niche = button.dataset.nicheValue || "all";
+    handleFilterChange();
+  });
+
+  dom.searchInput.addEventListener("input", (event) => {
+    state.search = event.target.value;
+    handleFilterChange();
+  });
+
+  dom.sortSelect.addEventListener("change", (event) => {
+    state.sort = event.target.value;
+    handleFilterChange();
+  });
+
+  dom.formatSelect.addEventListener("change", (event) => {
+    state.format = event.target.value;
+    handleFilterChange();
+  });
+
+  dom.trendSelect.addEventListener("change", (event) => {
+    state.trend = event.target.value;
+    handleFilterChange();
+  });
+
+  dom.clearFiltersButton.addEventListener("click", () => {
+    resetFilters();
+    render();
+  });
+
+  dom.loadMoreButton.addEventListener("click", () => {
+    state.visibleCount += PAGE_SIZE;
+    render();
+  });
+
+  dom.clearShortlistButton.addEventListener("click", () => {
+    state.savedIds = [];
+    saveSavedIds();
+    render();
+  });
+
+  document.addEventListener("click", (event) => {
+    const saveButton = event.target.closest("[data-save-id]");
+
+    if (!saveButton) {
+      return;
+    }
+
+    toggleSavedId(saveButton.dataset.saveId || "");
+  });
+}
+
+function init() {
+  renderFormatOptions();
+  resetFilters();
+  bindEvents();
+  render();
+  startLoaderSequence();
+}
+
+init();

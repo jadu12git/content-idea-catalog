@@ -1,319 +1,203 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creator Content Idea Catalog</title>
-    <meta
-      name="description"
-      content="A clean one-page catalog for browsing creator content ideas by format, effort, and audience intent."
+    <title>Idea Atlas | Content Idea Catalog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="scripts.js" defer></script>
   </head>
-  <body>
-    <div class="page-shell">
-      <header class="hero">
-        <nav class="topbar" aria-label="Primary">
-          <a class="brand" href="#top" aria-label="Idea Atlas home">
-            <img class="brand-logo" src="assets/website_logo.jpg" alt="Idea Atlas logo" />
-          </a>
-          <div class="topbar-meta">
-          </div>
-        </nav>
-
-        <div class="hero-copy">
-          <p class="eyebrow">Creator Planning Hub</p>
-          <h1>Answer a few questions and get content ideas that fit your workflow.</h1>
-          <p class="hero-text">
-            Use this guided questionnaire to narrow down creator content ideas by
-            niche, skill level, filming time, editing effort, and current goal.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#questionnaire">Start Questionnaire</a>
-            <a class="button button-secondary" href="#results-section">View Results Area</a>
-          </div>
+  <body class="is-loading">
+    <div class="loading-screen" id="loading-screen" aria-live="polite">
+      <svg class="loading-bg-svg" viewBox="0 0 1440 900" aria-hidden="true">
+        <defs>
+          <linearGradient id="loadingStrokeA" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(124,157,255,0.05)" />
+            <stop offset="100%" stop-color="rgba(168,85,247,0.35)" />
+          </linearGradient>
+          <linearGradient id="loadingStrokeB" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(52,211,153,0.06)" />
+            <stop offset="100%" stop-color="rgba(124,157,255,0.28)" />
+          </linearGradient>
+        </defs>
+        <circle class="loading-bg-ring loading-bg-ring-a" cx="240" cy="700" r="220" />
+        <circle class="loading-bg-ring loading-bg-ring-b" cx="1140" cy="180" r="180" />
+        <path
+          class="loading-bg-path loading-bg-path-a"
+          d="M-40 622C132 498 242 450 374 456C542 464 618 620 788 628C970 636 1104 468 1480 534"
+        />
+        <path
+          class="loading-bg-path loading-bg-path-b"
+          d="M-60 312C116 210 278 162 424 188C600 218 730 360 890 358C1076 356 1202 210 1488 258"
+        />
+        <path
+          class="loading-bg-path loading-bg-path-c"
+          d="M168 108C318 120 466 192 560 282C654 372 774 454 930 468C1088 482 1226 436 1368 354"
+        />
+      </svg>
+      <div class="loading-panel">
+        <div class="loading-mark">
+          <img src="assets/website_logo.jpg" alt="" aria-hidden="true" />
+          <span class="loading-orbit"></span>
         </div>
-      </header>
+        <p class="loading-kicker">Idea Atlas</p>
+        <p class="loading-line" id="loading-line"></p>
+        <p class="loading-subline" id="loading-subline"></p>
+        <div class="loading-meter" aria-hidden="true">
+          <span class="loading-meter-fill"></span>
+        </div>
+        <span class="loading-cursor" aria-hidden="true"></span>
+      </div>
+    </div>
 
-      <main class="page-main">
-        <section
-          class="questionnaire-section filters-panel"
-          id="questionnaire"
-          aria-labelledby="questionnaire-title"
-        >
-          <div class="section-heading">
-            <p class="eyebrow">Questionnaire</p>
-            <h2 id="questionnaire-title">Tell us what kind of content support you need.</h2>
-          </div>
+    <div class="background-stage" aria-hidden="true">
+      <span class="bg-orb orb-one"></span>
+      <span class="bg-orb orb-two"></span>
+      <span class="bg-orb orb-three"></span>
+      <span class="bg-grid"></span>
+    </div>
 
-          <form
-            class="questionnaire-form"
-            id="questionnaire-form"
-            autocomplete="off"
-            aria-describedby="questionnaire-description"
-          >
-            <p class="form-description hero-text" id="questionnaire-description">
-              Complete the six questions below to generate a more relevant set of
-              creator content ideas.
-            </p>
-
-            <div class="question-grid">
-              <fieldset class="question-card" id="question-niche-group">
-                <legend class="field-label">1. What type of content do you create?</legend>
-                <div class="multi-select-group" id="niches-group" aria-label="Niche options">
-                  <label class="chip-option" for="niche-creator-education">
-                    <input
-                      id="niche-creator-education"
-                      type="checkbox"
-                      name="niches"
-                      value="creator-education"
-                    />
-                    <span>Creator Education</span>
-                  </label>
-                  <label class="chip-option" for="niche-youtube-growth">
-                    <input
-                      id="niche-youtube-growth"
-                      type="checkbox"
-                      name="niches"
-                      value="youtube-growth"
-                    />
-                    <span>YouTube Growth</span>
-                  </label>
-                  <label class="chip-option" for="niche-short-form-strategy">
-                    <input
-                      id="niche-short-form-strategy"
-                      type="checkbox"
-                      name="niches"
-                      value="short-form-strategy"
-                    />
-                    <span>Short-Form Strategy</span>
-                  </label>
-                  <label class="chip-option" for="niche-video-editing">
-                    <input
-                      id="niche-video-editing"
-                      type="checkbox"
-                      name="niches"
-                      value="video-editing"
-                    />
-                    <span>Video Editing</span>
-                  </label>
-                  <label class="chip-option" for="niche-email-marketing">
-                    <input
-                      id="niche-email-marketing"
-                      type="checkbox"
-                      name="niches"
-                      value="email-marketing"
-                    />
-                    <span>Email Marketing</span>
-                  </label>
-                  <label class="chip-option" for="niche-monetization">
-                    <input
-                      id="niche-monetization"
-                      type="checkbox"
-                      name="niches"
-                      value="monetization"
-                    />
-                    <span>Monetization</span>
-                  </label>
-                </div>
-              </fieldset>
-
-              <fieldset class="question-card" id="question-skill-level-group">
-                <legend class="field-label">2. What is your experience level?</legend>
-                <label class="select-field" for="skillLevel">
-                  <span class="field-label">Skill Level</span>
-                  <select id="skillLevel" name="skillLevel">
-                    <option value="">Select your experience</option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                  </select>
-                </label>
-              </fieldset>
-
-              <fieldset class="question-card" id="question-filming-time-group">
-                <legend class="field-label">3. How much time do you have to film?</legend>
-                <label class="select-field" for="filmingTime">
-                  <span class="field-label">Filming Time</span>
-                  <select id="filmingTime" name="filmingTime">
-                    <option value="">Select filming time</option>
-                    <option value="low">0-15 minutes</option>
-                    <option value="medium">15-45 minutes</option>
-                    <option value="high">45+ minutes</option>
-                  </select>
-                </label>
-              </fieldset>
-
-              <fieldset class="question-card" id="question-editing-effort-group">
-                <legend class="field-label">4. How much editing do you want to do?</legend>
-                <label class="select-field" for="editingEffort">
-                  <span class="field-label">Editing Effort</span>
-                  <select id="editingEffort" name="editingEffort">
-                    <option value="">Select editing effort</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
-                </label>
-              </fieldset>
-
-              <fieldset class="question-card" id="question-goal-group">
-                <legend class="field-label">5. What is your main goal right now?</legend>
-                <div class="multi-select-group" id="goals-group" aria-label="Goal options">
-                  <label class="chip-option" for="goal-grow-audience">
-                    <input
-                      id="goal-grow-audience"
-                      type="checkbox"
-                      name="goals"
-                      value="grow-audience"
-                    />
-                    <span>Grow Audience</span>
-                  </label>
-                  <label class="chip-option" for="goal-increase-engagement">
-                    <input
-                      id="goal-increase-engagement"
-                      type="checkbox"
-                      name="goals"
-                      value="increase-engagement"
-                    />
-                    <span>Increase Engagement</span>
-                  </label>
-                  <label class="chip-option" for="goal-improve-consistency">
-                    <input
-                      id="goal-improve-consistency"
-                      type="checkbox"
-                      name="goals"
-                      value="improve-consistency"
-                    />
-                    <span>Improve Consistency</span>
-                  </label>
-                  <label class="chip-option" for="goal-sell-offer">
-                    <input
-                      id="goal-sell-offer"
-                      type="checkbox"
-                      name="goals"
-                      value="sell-offer"
-                    />
-                    <span>Sell an Offer</span>
-                  </label>
-                  <label class="chip-option" for="goal-build-authority">
-                    <input
-                      id="goal-build-authority"
-                      type="checkbox"
-                      name="goals"
-                      value="build-authority"
-                    />
-                    <span>Build Authority</span>
-                  </label>
-                </div>
-              </fieldset>
-
-              <fieldset class="question-card" id="question-trend-friendly-group">
-                <legend class="field-label">6. Do you want trend-friendly ideas?</legend>
-                <div class="radio-group" id="trendFriendly-group">
-                  <label class="radio-option" for="trendFriendly-yes">
-                    <input
-                      id="trendFriendly-yes"
-                      type="radio"
-                      name="trendFriendly"
-                      value="yes"
-                    />
-                    <span>Yes</span>
-                  </label>
-                  <label class="radio-option" for="trendFriendly-no">
-                    <input
-                      id="trendFriendly-no"
-                      type="radio"
-                      name="trendFriendly"
-                      value="no"
-                    />
-                    <span>No</span>
-                  </label>
-                </div>
-              </fieldset>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-inner panel">
+          <a class="brand" href="#explore-view" aria-label="Idea Atlas home">
+            <img class="brand-logo" src="assets/website_logo.jpg" alt="Idea Atlas logo" />
+            <div class="brand-copy">
+              <span class="brand-label">Idea Atlas</span>
+              <strong>Content idea catalog</strong>
             </div>
+          </a>
 
-            <div class="form-actions" id="form-actions">
-              <button class="button button-primary" id="submit-questionnaire" type="submit">
-                Get My Ideas
-              </button>
-              <button class="button button-secondary" id="clear-questionnaire" type="reset">
-                Clear Form
-              </button>
+          <nav class="sidebar-nav" aria-label="Catalog views">
+            <button class="nav-button is-active" data-view-button="explore" type="button">
+              <span>Explore</span>
+              <span class="nav-count" id="explore-count">120</span>
+            </button>
+            <button class="nav-button" data-view-button="saved" type="button">
+              <span>Saved</span>
+              <span class="nav-count" id="saved-count">0</span>
+            </button>
+          </nav>
+
+          <section class="sidebar-section" aria-labelledby="niche-heading">
+            <div class="sidebar-section-head">
+              <h2 id="niche-heading">Niches</h2>
+              <button class="text-button" id="clear-niche-button" type="button">All</button>
             </div>
-          </form>
-        </section>
-
-        <section
-          class="results-section"
-          id="results-section"
-          aria-labelledby="results-title"
-          hidden
-        >
-          <div class="section-heading heading-row">
-            <div>
-              <p class="eyebrow">Results</p>
-              <h2 id="results-title">Recommended ideas based on your answers.</h2>
-            </div>
-            <p class="results-copy" id="results-summary">No results generated yet.</p>
-          </div>
-
-          <section class="stats" id="results-stats" aria-label="Result summary">
-            <article class="stat-card">
-              <span class="stat-value" id="matched-total">0</span>
-              <span class="stat-label">Total Matched Ideas</span>
-            </article>
-            <article class="stat-card">
-              <span class="stat-value" id="selected-niche">-</span>
-              <span class="stat-label">Top Niche Selected</span>
-            </article>
-            <article class="stat-card">
-              <span class="stat-value" id="average-engagement">-</span>
-              <span class="stat-label">Average Engagement</span>
-            </article>
-            <article class="stat-card">
-              <span class="stat-value" id="trend-friendly-count">0</span>
-              <span class="stat-label">Trend-Friendly Results</span>
-            </article>
+            <div class="niche-list" id="niche-nav"></div>
           </section>
 
-          <section class="catalog" id="results-catalog" aria-labelledby="results-list-title">
-            <div class="section-heading">
-              <p class="eyebrow">Idea List</p>
-              <h3 id="results-list-title">Suggested content ideas</h3>
-            </div>
-            <div class="results-toolbar" id="results-toolbar">
-              <label class="select-field results-filter-field" for="results-filter">
-                <span class="field-label">Filter Suggested Ideas</span>
-                <select id="results-filter" name="resultsFilter">
-                  <option value="all">All suggested ideas</option>
+          <section class="sidebar-section compact-stats" aria-label="Catalog overview">
+            <article class="compact-stat">
+              <span>Total</span>
+              <strong id="total-ideas-count">120</strong>
+            </article>
+            <article class="compact-stat">
+              <span>Niches</span>
+              <strong id="total-niches-count">12</strong>
+            </article>
+            <article class="compact-stat">
+              <span>Visible</span>
+              <strong id="visible-ideas-count">0</strong>
+            </article>
+          </section>
+        </div>
+      </aside>
+
+      <main class="main-stage">
+        <header class="toolbar panel">
+          <div class="toolbar-row">
+            <label class="search-field" for="search-input">
+              <span class="field-icon" aria-hidden="true">⌕</span>
+              <input
+                id="search-input"
+                type="search"
+                autocomplete="off"
+                placeholder="Search ideas, tags, goals, or formats"
+              />
+            </label>
+
+            <div class="toolbar-actions">
+              <label class="select-field" for="sort-select">
+                <select id="sort-select" aria-label="Sort ideas">
+                  <option value="featured">Top picks first</option>
+                  <option value="unique">Most unique</option>
+                  <option value="engagement">Highest engagement</option>
+                  <option value="fastest">Fastest to ship</option>
+                  <option value="easiest">Lowest effort</option>
+                  <option value="alphabetical">A to Z</option>
                 </select>
               </label>
+
+              <label class="select-field" for="format-select">
+                <select id="format-select" aria-label="Filter by format">
+                  <option value="all">All formats</option>
+                </select>
+              </label>
+
+              <label class="select-field" for="trend-select">
+                <select id="trend-select" aria-label="Filter by style">
+                  <option value="all">All styles</option>
+                  <option value="trend">Trend ready</option>
+                  <option value="evergreen">Evergreen</option>
+                </select>
+              </label>
+
+              <button class="ghost-button" id="clear-filters-button" type="button">Reset</button>
             </div>
-            <div class="card-grid" id="results-grid" aria-live="polite"></div>
+          </div>
+
+          <div class="active-filters" id="active-filters" aria-live="polite"></div>
+        </header>
+
+        <section class="view-panel" id="explore-view" aria-label="Explore ideas">
+          <section class="section-block">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">Featured</span>
+                <h1>Top picks</h1>
+              </div>
+              <div class="section-meta">
+                <span class="status-pill" id="results-count">0 results</span>
+              </div>
+            </div>
+            <div class="spotlight-grid" id="spotlight-grid"></div>
+          </section>
+
+          <section class="section-block">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">Browse</span>
+                <h2>Library</h2>
+              </div>
+              <button class="ghost-button" id="load-more-button" type="button">Load more</button>
+            </div>
+            <div class="catalog-grid" id="catalog-grid"></div>
           </section>
         </section>
 
-        <section
-          class="reset-section filters-panel"
-          id="reset-section"
-          aria-labelledby="reset-title"
-        >
-          <div class="section-heading heading-row">
+        <section class="view-panel is-hidden" id="saved-view" aria-label="Saved ideas">
+          <div class="section-head">
             <div>
-              <p class="eyebrow">Start Over</p>
-              <h2 id="reset-title">Want to try a different content direction?</h2>
+              <span class="section-kicker">Saved</span>
+              <h1>Your shortlist</h1>
             </div>
-            <p class="results-copy">Reset your answers and run the questionnaire again.</p>
+            <button class="ghost-button" id="clear-shortlist-button" type="button">Clear saved</button>
           </div>
-          <div class="reset-actions" id="reset-actions">
-            <button class="button button-secondary" id="start-over-button" type="button">
-              Start Over
-            </button>
+          <div class="catalog-grid" id="saved-grid"></div>
+          <div class="empty-state is-hidden" id="saved-empty">
+            Save cards from Explore to keep your best ideas here.
           </div>
         </section>
       </main>
     </div>
+
+    <script src="ideas-data.js"></script>
+    <script src="scripts.js"></script>
   </body>
 </html>
