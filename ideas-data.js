@@ -1885,7 +1885,7 @@ const GENERATED_IDEA_BLUEPRINTS = {
       ["Sponsored Storytelling", "ads feel native to your content instead of bolted on", ["sponsored", "storytelling", "integration"]],
     ],
   },
-  Repurposing: {
+  "Repurposing": {
     formats: ["Carousel", "YouTube", "Shorts", "Carousel", "Live"],
     topics: [
       ["Content Atomization", "one long piece turns into a week of assets instead of one upload", ["repurposing", "assets", "systems"]],
