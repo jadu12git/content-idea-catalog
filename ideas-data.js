@@ -1861,7 +1861,7 @@ const GENERATED_IDEA_BLUEPRINTS = {
       ["B-Roll Systems", "talking-head videos stop feeling flat and repetitive", ["b-roll", "visuals", "workflow"]],
     ],
   },
-  Monetization: {
+  "Monetization": {
     formats: ["Carousel", "YouTube", "Shorts", "Newsletter", "YouTube"],
     topics: [
       ["Offer Positioning", "small creators sell something believable before they try selling something big", ["offers", "positioning", "sales"]],
